@@ -1,0 +1,6 @@
+AppBundle\Sync\Entity\File:
+    file{1..4}:
+        uid: <word()>.<fileExtension()>
+        path: /path/to/<randomElement([@self->uid])>
+        size: <randomNumber()>
+        modified: <dateTimeBetween('-200 days', 'now')>

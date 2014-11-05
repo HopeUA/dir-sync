@@ -1,0 +1,18 @@
+services:
+    # Logs
+    app_logger:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: ["app"]
+        calls:
+            - [pushHandler, [@log_handler]]
+    log_handler:
+        class: Monolog\Handler\StreamHandler
+        arguments: [%kernel.logs_dir%/sync.log, 200]
+        calls:
+            - [setFormatter, [@log_formatter]]
+    log_formatter:
+    #    class: Monolog\Formatter\LogstashFormatter
+    #    arguments: ["dir-sync"]
+        class: Monolog\Formatter\LineFormatter
+
+
