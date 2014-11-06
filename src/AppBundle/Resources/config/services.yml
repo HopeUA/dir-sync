@@ -15,4 +15,15 @@ services:
     #    arguments: ["dir-sync"]
         class: Monolog\Formatter\LineFormatter
 
+    # Storage services
+    storage.local:
+        class: AppBundle\Sync\Storage\Local
+        public: false
+    storage.lto:
+        class: AppBundle\Sync\Storage\Lto
+        public: false
 
+    # Filters
+    filter.path:
+        class: AppBundle\Sync\Entity\Filter\Path
+        scope: prototype

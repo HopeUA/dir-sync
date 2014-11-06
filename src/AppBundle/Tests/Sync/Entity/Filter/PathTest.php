@@ -16,7 +16,8 @@ class PathTest extends \PHPUnit_Framework_TestCase
         $file = new File();
         $file->setPath($path);
 
-        $filter = new Path($pattern);
+        $filter = new Path();
+        $filter->setPattern($pattern);
         $this->assertEquals($valid, $filter->valid($file));
     }
 

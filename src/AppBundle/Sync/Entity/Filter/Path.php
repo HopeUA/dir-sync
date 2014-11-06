@@ -7,13 +7,16 @@ class Path implements FilterInterface
 {
     protected $pattern;
 
-    public function __construct($pattern)
-    {
-        $this->pattern = $pattern;
-    }
-
     public function valid(File $file)
     {
         return preg_match($this->pattern, $file->getPath());
+    }
+
+    /**
+     * @param string $pattern
+     */
+    public function setPattern($pattern)
+    {
+        $this->pattern = $pattern;
     }
 }

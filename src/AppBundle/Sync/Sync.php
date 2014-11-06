@@ -5,7 +5,7 @@ use AppBundle\Exception\StorageException;
 use AppBundle\Exception\TaskException;
 use AppBundle\Sync\Storage\AbstractStorage as Storage;
 use Psr\Log\NullLogger;
-use Psr\Log\AbstractLogger as Logger;
+use Psr\Log\LoggerInterface;
 
 class Sync
 {
@@ -40,7 +40,7 @@ class Sync
     protected $slavePathTpl;
 
     /**
-     * @var Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -99,7 +99,7 @@ class Sync
     }
 
     /**
-     * @return Logger
+     * @return LoggerInterface
      */
     protected function getLogger()
     {
@@ -111,9 +111,9 @@ class Sync
     }
 
     /**
-     * @param Logger $logger
+     * @param LoggerInterface $logger
      */
-    public function setLogger(Logger $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }

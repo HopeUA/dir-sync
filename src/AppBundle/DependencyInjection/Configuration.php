@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('storage')->isRequired()->end()
                         ->scalarNode('path')->isRequired()->end()
+                        ->scalarNode('path_tpl')->isRequired()->end()
                         ->variableNode('filters')->end()
                     ->end()
                 ->end()

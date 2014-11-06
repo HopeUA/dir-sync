@@ -55,7 +55,8 @@ class SyncTest extends \PHPUnit_Framework_TestCase
         $sync = new Sync();
 
         // Set up Master
-        $pathFilter = new Path('~[A-Z]{4}/stream/.*\.mov~');
+        $pathFilter = new Path();
+        $pathFilter->setPattern('~[A-Z]{4}/stream/.*\.mov~');
 
         $masterStorage = new Local();
         $masterPath    = 'root/source';

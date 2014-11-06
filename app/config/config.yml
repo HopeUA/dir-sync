@@ -37,4 +37,5 @@ app:
     slave:
         storage: "%slave.storage%"
         path:    "%slave.path%"
+        path_tpl: "%slave.path_tpl%"
         filters: "%slave.filters%"
