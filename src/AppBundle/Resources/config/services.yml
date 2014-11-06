@@ -27,3 +27,13 @@ services:
     filter.path:
         class: AppBundle\Sync\Entity\Filter\Path
         scope: prototype
+
+    app:
+        class: AppBundle\Sync\Sync
+        calls:
+            - [setMasterStorage, [@master.storage]]
+            - [setMasterPath, [%master.path%]]
+            - [setSlaveStorage, [@slave.storage]]
+            - [setSlavePath, [%slave.path%]]
+            - [setSlavePathTpl, ["%slave.path%%slave.path_tpl%"]]
+            - [setLogger, [@app_logger]]
