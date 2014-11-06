@@ -40,4 +40,9 @@ class Add extends Task
     {
         $this->destPath = $destPath;
     }
+
+    public function getMessageSuccess()
+    {
+        return sprintf('Copied %s', basename($this->getSourcePath()));
+    }
 }

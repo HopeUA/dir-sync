@@ -23,4 +23,9 @@ class Delete extends Task
     {
         $this->destPath = $destPath;
     }
+
+    public function getMessageSuccess()
+    {
+        return sprintf('Deleted %s', basename($this->getDestPath()));
+    }
 }

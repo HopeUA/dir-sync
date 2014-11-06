@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Sync\Storage;
 
+use AppBundle\Exception\StorageException;
 use DateTime;
 use FilesystemIterator;
 use AppBundle\Sync\Entity\File;
@@ -9,35 +10,40 @@ use AppBundle\Sync\Entity\FileCollection;
 class Local extends AbstractStorage
 {
     /**
+     * Put a file
+     *
      * @param $sourcePath
      * @param $destPath
-     *
-     * @return bool
      */
     public function put($sourcePath, $destPath)
     {
         if (!is_file($sourcePath)) {
-            return false;
+            throw new StorageException(sprintf('File %s not found', $sourcePath));
         }
 
         $this->ensureDirectory(dirname($destPath));
 
-        return copy($sourcePath, $destPath);
+        $result = copy($sourcePath, $destPath);
+        if (!$result) {
+            throw new StorageException(sprintf('Copy failed: %s', $sourcePath));
+        }
     }
 
     /**
      * Delete a file
      *
      * @param $path
-     * @return bool
      */
     public function delete($path)
     {
         if (!is_file($path)) {
-            return false;
+            throw new StorageException(sprintf('File %s not found', $path));
         }
 
-        return unlink($path);
+        $result = unlink($path);
+        if (!$result) {
+            throw new StorageException(sprintf('Delete failed: %s', $path));
+        }
     }
 
     /**
@@ -84,7 +90,10 @@ class Local extends AbstractStorage
     protected function ensureDirectory($dir)
     {
         if (!is_dir($dir)) {
-            mkdir($dir, 0755, true);
+            $result = mkdir($dir, 0755, true);
+            if (!$result) {
+                throw new StorageException(sprintf('Can\t create directory %s', $dir));
+            }
         }
 
         return realpath($dir);

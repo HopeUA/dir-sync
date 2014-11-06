@@ -9,4 +9,6 @@ abstract class Task extends Entity
     {
         return $this->name;
     }
+
+    abstract public function getMessageSuccess();
 }

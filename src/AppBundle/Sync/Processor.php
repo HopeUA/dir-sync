@@ -24,21 +24,22 @@ class Processor
             throw new TaskException(sprintf('Can\'t process {%s} task', $method));
         }
 
-        return $this->$method($task);
+        $this->$method($task);
+        return $task->getMessageSuccess();
     }
 
     protected function add(Add $task)
     {
-        return $this->storage->put($task->getSourcePath(), $task->getDestPath());
+        $this->storage->put($task->getSourcePath(), $task->getDestPath());
     }
 
     protected function delete(Delete $task)
     {
-        return $this->storage->delete($task->getDestPath());
+        $this->storage->delete($task->getDestPath());
     }
 
     protected function update(Update $task)
     {
-        return $this->storage->put($task->getSourcePath(), $task->getDestPath());
+        $this->storage->put($task->getSourcePath(), $task->getDestPath());
     }
 }

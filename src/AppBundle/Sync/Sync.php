@@ -69,11 +69,12 @@ class Sync
         $processor = new Processor($this->getSlaveStorage());
         foreach ($tasks as $task) {
             try {
-                $processor->execute($task);
+                $result = $processor->execute($task);
+                $logger->info($result);
             } catch (TaskException $e) {
-
+                $logger->error($e->getMessage());
             } catch (StorageException $e) {
-
+                $logger->error($e->getMessage());
             }
         }
 

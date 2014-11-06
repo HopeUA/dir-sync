@@ -40,4 +40,9 @@ class Update extends Task
     {
         $this->destPath = $destPath;
     }
+
+    public function getMessageSuccess()
+    {
+        return sprintf('Updated %s', basename($this->getSourcePath()));
+    }
 }

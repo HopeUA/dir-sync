@@ -11,10 +11,10 @@ class Lto extends AbstractStorage
     private $regList = "~(?P<size>[\d,]+) +B +(?P<date>\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}) +(?P<path>[^ ]+) +Never +Archive +Date: +(?P<archive_date>\d{2}\/\d{2}\/\d{2})~";
 
     /**
+     * Put a file
+     *
      * @param $sourcePath
      * @param $destPath
-     *
-     * @return bool
      */
     public function put($sourcePath, $destPath)
     {
@@ -30,15 +30,12 @@ class Lto extends AbstractStorage
         if (strpos($result, 'finished without failure') === false) {
             throw new StorageException($result);
         }
-
-        return true;
     }
 
     /**
      * Delete a file
      *
      * @param $path
-     * @return bool
      */
     public function delete($path)
     {
@@ -48,8 +45,6 @@ class Lto extends AbstractStorage
         if (strpos($result, 'finished without failure') === false) {
             throw new StorageException($result);
         }
-
-        return true;
     }
 
     /**

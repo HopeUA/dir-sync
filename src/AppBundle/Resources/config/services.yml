@@ -28,6 +28,7 @@ services:
         class: AppBundle\Sync\Entity\Filter\Path
         scope: prototype
 
+    # Main App
     app:
         class: AppBundle\Sync\Sync
         calls:
