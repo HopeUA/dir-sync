@@ -19,7 +19,8 @@
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "~4.1",
         "mikey179/vfsStream": "~1.0",
-        "nelmio/alice": "~1.7"
+        "nelmio/alice": "~1.7",
+        "squizlabs/php_codesniffer": "~1.5"
     },
     "scripts": {
         "post-root-package-install": [

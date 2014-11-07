@@ -57,41 +57,48 @@ class LocalTest extends \PHPUnit_Framework_TestCase
         $dest1   = 'root/dest/ADUU/stream/ADUU00313.mov';
         $source2 = 'root/source/BCUU/stream/BCUU00113.mov';
         $dest2   = 'root/dest/BCUU/stream/BCUU00113.mov';
-        $source3 = 'root/source/UUUU/stream/BCUU00113.mov';
-        $dest3   = 'root/dest/UUUU/stream/BCUU00113.mov';
 
         $storage = new Local();
 
         // Replace existing file
-        $result = $storage->put(vfsStream::url($source1), vfsStream::url($dest1));
-        $this->assertTrue($result);
+        $storage->put(vfsStream::url($source1), vfsStream::url($dest1));
         $this->assertTrue($this->root->hasChild($dest1));
 
         // Create new file and dir
-        $result = $storage->put(vfsStream::url($source2), vfsStream::url($dest2));
-        $this->assertTrue($result);
+        $storage->put(vfsStream::url($source2), vfsStream::url($dest2));
         $this->assertTrue($this->root->hasChild($dest2));
+    }
 
-        // Missing file
-        $result = $storage->put(vfsStream::url($source3), vfsStream::url($dest3));
-        $this->assertFalse($result);
+    /**
+     * @expectedException \AppBundle\Exception\StorageException
+     */
+    public function testFailedPut()
+    {
+        $source3 = 'root/source/UUUU/stream/BCUU00113.mov';
+        $dest3   = 'root/dest/UUUU/stream/BCUU00113.mov';
+
+        $storage = new Local();
+        $storage->put(vfsStream::url($source3), vfsStream::url($dest3));
     }
 
     public function testDelete()
     {
-        $dest1 = 'root/dest/ADUU/stream/ADUU00313.mov';
-        $dest2 = 'root/dest/BCUU/stream/BCUU00113.mov';
-
         $storage = new Local();
 
-        // Delete file
-        $result = $storage->delete(vfsStream::url($dest1));
-        $this->assertTrue($result);
+        $dest1 = 'root/dest/ADUU/stream/ADUU00313.mov';
+        $storage->delete(vfsStream::url($dest1));
         $this->assertFalse($this->root->hasChild($dest1));
+    }
 
-        // Missing file
-        $result = $storage->delete(vfsStream::url($dest2));
-        $this->assertFalse($result);
+    /**
+     * @expectedException \AppBundle\Exception\StorageException
+     */
+    public function testFailedDelete()
+    {
+        $storage = new Local();
+
+        $dest2 = 'root/dest/BCUU/stream/BCUU00113.mov';
+        $storage->delete(vfsStream::url($dest2));
     }
 
     public function testList()
