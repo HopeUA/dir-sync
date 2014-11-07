@@ -3,6 +3,7 @@ namespace AppBundle\Tests\Sync\Entity;
 
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;
+use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
 class FileCollectionTest extends \PHPUnit_Framework_TestCase
 {
@@ -90,6 +91,20 @@ class FileCollectionTest extends \PHPUnit_Framework_TestCase
         }
 
         $fc->filter(['bad filter']);
+    }
+
+    /**
+     * @dataProvider fileProvider
+     * @expectedException \AppBundle\Exception\FilterException
+     */
+    public function testBadFilterWithObject($files)
+    {
+        $fc = new FileCollection();
+        foreach ($files as $file) {
+            $fc->addFile($file);
+        }
+
+        $fc->filter([new \stdClass()]);
     }
 
     /**
