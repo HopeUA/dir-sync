@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Sync\Storage;
 
-use AppBundle\Exception\StorageException;
+use AppBundle\Exception\LocalStorageException;
 use DateTime;
 use FilesystemIterator;
 use AppBundle\Sync\Entity\File;
@@ -18,14 +18,14 @@ class Local extends AbstractStorage
     public function put($sourcePath, $destPath)
     {
         if (!is_file($sourcePath)) {
-            throw new StorageException(sprintf('File %s not found', $sourcePath));
+            throw new LocalStorageException(sprintf('File %s not found', $sourcePath), LocalStorageException::FILE_NOT_FOUND);
         }
 
         $this->ensureDirectory(dirname($destPath));
 
-        $result = copy($sourcePath, $destPath);
+        $result = @copy($sourcePath, $destPath);
         if (!$result) {
-            throw new StorageException(sprintf('Copy failed: %s', $sourcePath));
+            throw new LocalStorageException(sprintf('Copy failed: %s', $sourcePath), LocalStorageException::OPERATION_FAIL);
         }
     }
 
@@ -37,12 +37,12 @@ class Local extends AbstractStorage
     public function delete($path)
     {
         if (!is_file($path)) {
-            throw new StorageException(sprintf('File %s not found', $path));
+            throw new LocalStorageException(sprintf('File %s not found', $path), LocalStorageException::FILE_NOT_FOUND);
         }
 
         $result = unlink($path);
         if (!$result) {
-            throw new StorageException(sprintf('Delete failed: %s', $path));
+            throw new LocalStorageException(sprintf('Delete failed: %s', $path), LocalStorageException::OPERATION_FAIL);
         }
     }
 
@@ -55,9 +55,16 @@ class Local extends AbstractStorage
      */
     public function listContents($directory = '')
     {
-        $flags    = FilesystemIterator::SKIP_DOTS | FilesystemIterator::UNIX_PATHS;
+        $flags = FilesystemIterator::SKIP_DOTS | FilesystemIterator::UNIX_PATHS;
 
-        $dirIterator  = new \RecursiveDirectoryIterator($directory, $flags);
+        try {
+            $dirIterator  = new \RecursiveDirectoryIterator($directory, $flags);
+        } catch (\UnexpectedValueException $e) {
+            throw new LocalStorageException(
+                sprintf('Directory missing: %s', $directory),
+                LocalStorageException::FILE_NOT_FOUND
+            );
+        }
         $fileIterator = new \RecursiveIteratorIterator($dirIterator);
 
         $fc = new FileCollection();
@@ -92,7 +99,10 @@ class Local extends AbstractStorage
         if (!is_dir($dir)) {
             $result = mkdir($dir, 0755, true);
             if (!$result) {
-                throw new StorageException(sprintf('Can\t create directory %s', $dir));
+                throw new LocalStorageException(
+                    sprintf('Can\t create directory %s', $dir),
+                    LocalStorageException::OPERATION_FAIL
+                );
             }
         }
 

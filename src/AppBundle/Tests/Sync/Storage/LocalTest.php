@@ -70,35 +70,76 @@ class LocalTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \AppBundle\Exception\StorageException
+     * @expectedException \AppBundle\Exception\LocalStorageException
+     * @expectedExceptionCode \AppBundle\Exception\LocalStorageException::FILE_NOT_FOUND
      */
     public function testFailedPut()
     {
-        $source3 = 'root/source/UUUU/stream/BCUU00113.mov';
-        $dest3   = 'root/dest/UUUU/stream/BCUU00113.mov';
+        $source = 'root/source/UUUU/stream/BCUU00113.mov';
+        $dest   = 'root/dest/UUUU/stream/BCUU00113.mov';
 
         $storage = new Local();
-        $storage->put(vfsStream::url($source3), vfsStream::url($dest3));
+        $storage->put(vfsStream::url($source), vfsStream::url($dest));
+    }
+
+    /**
+     * @expectedException \AppBundle\Exception\LocalStorageException
+     * @expectedExceptionCode \AppBundle\Exception\LocalStorageException::OPERATION_FAIL
+     */
+    public function testFailedPutPermissions()
+    {
+        $source = 'root/source/ADUU/stream/ADUU00313.mov';
+        $dest   = 'root/dest/ADUU/stream/BCUU00113.mov';
+
+        /**
+         * @var \org\bovigo\vfs\vfsStreamFile $vfsLockFile
+         */
+        $vfsLockFile = $this->root->getChild($source);
+        $vfsLockFile->chmod(0400)
+                    ->chown(1);
+
+        $storage = new Local();
+        $storage->put(vfsStream::url($source), vfsStream::url($dest));
     }
 
     public function testDelete()
     {
         $storage = new Local();
 
-        $dest1 = 'root/dest/ADUU/stream/ADUU00313.mov';
-        $storage->delete(vfsStream::url($dest1));
-        $this->assertFalse($this->root->hasChild($dest1));
+        $dest = 'root/dest/ADUU/stream/ADUU00313.mov';
+        $storage->delete(vfsStream::url($dest));
+        $this->assertFalse($this->root->hasChild($dest));
     }
 
     /**
-     * @expectedException \AppBundle\Exception\StorageException
+     * @expectedException \AppBundle\Exception\LocalStorageException
+     * @expectedExceptionCode \AppBundle\Exception\LocalStorageException::FILE_NOT_FOUND
      */
     public function testFailedDelete()
     {
         $storage = new Local();
 
-        $dest2 = 'root/dest/BCUU/stream/BCUU00113.mov';
-        $storage->delete(vfsStream::url($dest2));
+        $dest = 'root/dest/BCUU/stream/BCUU00113.mov';
+        $storage->delete(vfsStream::url($dest));
+    }
+
+    /**
+     * @expectedException \AppBundle\Exception\LocalStorageException
+     * @expectedExceptionCode \AppBundle\Exception\LocalStorageException::OPERATION_FAIL
+     */
+    public function testFailedDeletePermissions()
+    {
+        $storage = new Local();
+
+        $dest = 'root/dest/ADUU/stream/ADUU00313.mov';
+        /**
+         * @var \org\bovigo\vfs\vfsStreamFile $vfsLockFile
+         */
+        $vfsLockFile = $this->root->getChild(dirname($dest));
+        $vfsLockFile->chmod(0400)
+                    ->chown(1);
+
+        $storage->delete(vfsStream::url($dest));
     }
 
     public function testList()
@@ -116,5 +157,17 @@ class LocalTest extends \PHPUnit_Framework_TestCase
          */
         $file = $collection->get(vfsStream::url($sourceFile));
         $this->assertEquals('ADUU00313.mov', $file->getUid());
+    }
+
+    /**
+     * @expectedException \AppBundle\Exception\LocalStorageException
+     * @expectedExceptionCode \AppBundle\Exception\LocalStorageException::FILE_NOT_FOUND
+     */
+    public function testListNotFound()
+    {
+        $sourceDir  = 'root/missing/dir';
+
+        $storage    = new Local();
+        $collection = $storage->listContents(vfsStream::url($sourceDir));
     }
 }
