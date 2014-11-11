@@ -133,10 +133,10 @@ class LocalTest extends \PHPUnit_Framework_TestCase
 
         $dest = 'root/dest/ADUU/stream/ADUU00313.mov';
         /**
-         * @var \org\bovigo\vfs\vfsStreamFile $vfsLockFile
+         * @var \org\bovigo\vfs\vfsStreamFile $vfsDestDir
          */
-        $vfsLockFile = $this->root->getChild(dirname($dest));
-        $vfsLockFile->chmod(0400)
+        $vfsDestDir = $this->root->getChild(dirname($dest));
+        $vfsDestDir->chmod(0400)
                     ->chown(1);
 
         $storage->delete(vfsStream::url($dest));
@@ -169,5 +169,25 @@ class LocalTest extends \PHPUnit_Framework_TestCase
 
         $storage    = new Local();
         $collection = $storage->listContents(vfsStream::url($sourceDir));
+    }
+
+    /**
+     * @expectedException \AppBundle\Exception\LocalStorageException
+     * @expectedExceptionCode \AppBundle\Exception\LocalStorageException::OPERATION_FAIL
+     */
+    public function testDirectoryFailed()
+    {
+        $source = 'root/source/ADUU/stream/ADUU00313.mov';
+        $dest   = 'root/dest/XXXX/stream/ADUU00313.mov';
+
+        /**
+         * @var \org\bovigo\vfs\vfsStreamFile $vfsDestDir
+         */
+        $vfsDestDir = $this->root->getChild(dirname($dest));
+        $vfsDestDir->chmod(0400)
+                    ->chown(1);
+
+        $storage = new Local();
+        $storage->put($source, $dest);
     }
 }
