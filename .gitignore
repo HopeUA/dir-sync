@@ -9,3 +9,5 @@
 /bin/
 /app/phpunit.xml
 /dev/
+
+.DS_Store

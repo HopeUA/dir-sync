@@ -183,11 +183,11 @@ class LocalTest extends \PHPUnit_Framework_TestCase
         /**
          * @var \org\bovigo\vfs\vfsStreamFile $vfsDestDir
          */
-        $vfsDestDir = $this->root->getChild(dirname($dest));
+        $vfsDestDir = $this->root->getChild('root/dest');
         $vfsDestDir->chmod(0400)
-                    ->chown(1);
+                   ->chown(1);
 
         $storage = new Local();
-        $storage->put($source, $dest);
+        $storage->put(vfsStream::url($source), vfsStream::url($dest));
     }
 }

@@ -53,7 +53,7 @@ class FileCollection extends Collection
      * @param File $file
      * @param null $key
      */
-    public function add(File $file, $key) {
+    public function add(File $file, $key = null) {
         $this->addToIndex($file);
 
         parent::add($file, $key);
