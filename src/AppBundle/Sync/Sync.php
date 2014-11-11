@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Sync;
 
+use AppBundle\Exception\FilterException;
 use AppBundle\Exception\StorageException;
 use AppBundle\Exception\TaskException;
 use AppBundle\Sync\Storage\AbstractStorage as Storage;
@@ -55,17 +56,29 @@ class Sync
         // Log
         $logger->info('START Synchronization');
 
-        $masterFiles = $this->getFiles($this->getMasterStorage(), $this->getMasterPath(), $this->getMasterFilters());
-        $logger->info(sprintf('Master files count: %d', count($masterFiles)));
+        try {
+            $masterFiles = $this->getFiles($this->getMasterStorage(), $this->getMasterPath(), $this->getMasterFilters());
+            $logger->info(sprintf('Master files count: %d', count($masterFiles)));
 
-        $slaveFiles  = $this->getFiles($this->getSlaveStorage(), $this->getSlavePath(), $this->getSlaveFilters());
-        $logger->info(sprintf('Slave files count: %d', count($slaveFiles)));
+            $slaveFiles  = $this->getFiles($this->getSlaveStorage(), $this->getSlavePath(), $this->getSlaveFilters());
+            $logger->info(sprintf('Slave files count: %d', count($slaveFiles)));
+        } catch (FilterException $e) {
+            $logger->error($e->getMessage());
+            $logger->error('ABORT Synchronization');
+            return;
+        }
 
-        $generator = new TaskGenerator($masterFiles, $slaveFiles);
-        $generator->setSlavePathTpl($this->getSlavePathTpl());
+        try {
+            $generator = new TaskGenerator($masterFiles, $slaveFiles);
+            $generator->setSlavePathTpl($this->getSlavePathTpl());
 
-        $tasks = $generator->handle($masterFiles, $slaveFiles);
-        $logger->info(sprintf('Generated %d tasks', count($tasks)));
+            $tasks = $generator->handle($masterFiles, $slaveFiles);
+            $logger->info(sprintf('Generated %d tasks', count($tasks)));
+        } catch (TaskException $e) {
+            $logger->error($e->getMessage());
+            $logger->error('ABORT Synchronization');
+            return;
+        }
 
         $processor = new Processor($this->getSlaveStorage());
         foreach ($tasks as $task) {
