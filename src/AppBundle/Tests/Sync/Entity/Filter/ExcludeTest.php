@@ -9,7 +9,7 @@ class ExcludeTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
-        $files    = ['TEST00113', 'TEST00213', 'TEST00313'];
+        $files    = ['TEST00113.mov', 'TEST00213.mov', 'TEST00313.mov'];
         $excludes = [$files[0], $files[1]];
         $tree     = ['exclude.list' => json_encode($excludes)];
 

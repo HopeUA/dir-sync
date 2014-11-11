@@ -30,5 +30,14 @@ class AppExtension extends Extension
         // Set path
         $path = $config['path'];
         $container->setParameter($type . '.path', $path);
+
+        // Set filters
+        $filters = $config['filters'];
+        $container->setParameter($type . '.filters', $filters);
+
+        if ('slave' == $type) {
+            $pathTpl = $config['path_tpl'];
+            $container->setParameter($type . '.path_tpl', $pathTpl);
+        }
     }
 }

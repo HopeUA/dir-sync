@@ -35,6 +35,10 @@ class SyncCommand extends ContainerAwareCommand
 
         $filterConfigs = $container->getParameter($type . '.filters');
 
+        if (is_null($filterConfigs)) {
+            return [];
+        }
+
         foreach ($filterConfigs as $name => $options) {
             $filter = $container->get('filter.' . $name);
 

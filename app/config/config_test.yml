@@ -14,11 +14,13 @@ web_profiler:
 
 app:
     master:
-        storage: AppBundle\Sync\Storage\Local
+        storage: local
         path:    "vfs://root/source"
         filters:
             path: { pattern: "~[A-Z]{4}/stream/.*\.mov~" }
+            exclude: { path: "vfs://root/exclude.json" }
     slave:
-        storage: AppBundle\Sync\Storage\Local
+        storage: local
         path:    "vfs://root/dest"
+        path_tpl: "/{program}/{uid}"
         filters:

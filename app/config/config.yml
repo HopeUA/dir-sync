@@ -31,11 +31,11 @@ twig:
 
 app:
     master:
-        storage: "%master.storage%"
-        path:    "%master.path%"
-        filters: "%master.filters%"
+        storage: "%app.master.storage%"
+        path:    "%app.master.path%"
+        filters: "%app.master.filters%"
     slave:
-        storage: "%slave.storage%"
-        path:    "%slave.path%"
-        path_tpl: "%slave.path_tpl%"
-        filters: "%slave.filters%"
+        storage: "%app.slave.storage%"
+        path:    "%app.slave.path%"
+        path_tpl: "%app.slave.path_tpl%"
+        filters: "%app.slave.filters%"

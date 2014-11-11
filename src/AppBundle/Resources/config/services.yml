@@ -27,6 +27,9 @@ services:
     filter.path:
         class: AppBundle\Sync\Entity\Filter\Path
         scope: prototype
+    filter.exclude:
+        class: AppBundle\Sync\Entity\Filter\Exclude
+        scope: prototype
 
     # Main App
     app:
