@@ -24,7 +24,7 @@ class TaskGenerator
     public function getSlavePathTpl()
     {
         if ($this->slavePathTpl == '') {
-            throw new TaskException('You must set the Slave Path template');
+            throw new TaskException('You must set the Slave Path template', TaskException::SLAVE_PATH_NOT_SET);
         }
 
         return $this->slavePathTpl;

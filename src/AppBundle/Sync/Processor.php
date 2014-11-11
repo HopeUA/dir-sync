@@ -21,7 +21,7 @@ class Processor
     {
         $method = $task->getName();
         if (!method_exists($this, $method)) {
-            throw new TaskException(sprintf('Can\'t process {%s} task', $method));
+            throw new TaskException(sprintf('Can\'t process {%s} task', $method), TaskException::INVALID_TASK);
         }
 
         $this->$method($task);

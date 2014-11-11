@@ -43,4 +43,17 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
         $processor->execute($task);
     }
+
+    /**
+     * @expectedException \AppBundle\Exception\TaskException
+     * @expectedExceptionCode \AppBundle\Exception\TaskException::INVALID_TASK
+     */
+    public function testInvalidTask()
+    {
+        $storage   = $this->getMock('\\AppBundle\\Sync\\Storage\\AbstractStorage');
+        $processor = new Processor($storage);
+        $task      = $this->getMock('\\AppBundle\\Sync\\Entity\\Task');
+
+        $processor->execute($task);
+    }
 }

@@ -43,4 +43,14 @@ class TaskGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('update', $tasks->get(1)->getName());
         $this->assertEquals('delete', $tasks->get(2)->getName());
     }
+
+    /**
+     * @expectedException \AppBundle\Exception\TaskException
+     * @expectedExceptionCode \AppBundle\Exception\TaskException::SLAVE_PATH_NOT_SET
+     */
+    public function testNotSetPathTpl()
+    {
+        $taskGenerator = new TaskGenerator();
+        $taskGenerator->getSlavePathTpl();
+    }
 }

@@ -6,6 +6,7 @@ use AppBundle\Exception\TaskException;
 use AppBundle\Sync\Storage\AbstractStorage as Storage;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 
 class Sync
 {
@@ -74,6 +75,8 @@ class Sync
             } catch (TaskException $e) {
                 $logger->error($e->getMessage());
             } catch (StorageException $e) {
+                $logger->error($e->getMessage());
+            } catch (RuntimeException $e) {
                 $logger->error($e->getMessage());
             }
         }
