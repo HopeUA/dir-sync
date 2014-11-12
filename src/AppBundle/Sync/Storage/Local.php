@@ -17,7 +17,7 @@ class Local extends AbstractStorage
      */
     public function put($sourcePath, $destPath)
     {
-        if (!is_file($sourcePath)) {
+        if (!@is_file($sourcePath)) {
             throw new LocalStorageException(
                 sprintf('File %s not found', $sourcePath),
                 LocalStorageException::FILE_NOT_FOUND
@@ -42,14 +42,14 @@ class Local extends AbstractStorage
      */
     public function delete($path)
     {
-        if (!is_file($path)) {
+        if (!@is_file($path)) {
             throw new LocalStorageException(
                 sprintf('File %s not found', $path),
                 LocalStorageException::FILE_NOT_FOUND
             );
         }
 
-        $result = unlink($path);
+        $result = @unlink($path);
         if (!$result) {
             throw new LocalStorageException(
                 sprintf('Delete failed: %s', $path),
@@ -107,7 +107,7 @@ class Local extends AbstractStorage
      */
     protected function ensureDirectory($dir)
     {
-        if (!is_dir($dir)) {
+        if (!@is_dir($dir)) {
             $result = mkdir($dir, 0755, true);
             if (!$result) {
                 throw new LocalStorageException(
