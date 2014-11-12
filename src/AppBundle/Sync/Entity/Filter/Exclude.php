@@ -48,7 +48,7 @@ class Exclude implements FilterInterface
         $result = json_decode($result);
         if (is_null($result)) {
             throw new ExcludeFilterException(
-                sprintf('[ExludeFilter] Error while loading exclude data from %s', $result),
+                sprintf('[ExludeFilter] Error while loading exclude data from %s', $this->getPath()),
                 ExcludeFilterException::INVALID_JSON
             );
         }
