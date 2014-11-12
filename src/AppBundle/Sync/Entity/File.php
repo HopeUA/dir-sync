@@ -76,4 +76,14 @@ class File extends Entity
     {
         $this->uid = $uid;
     }
+
+    public function __toString()
+    {
+        return sprintf(
+            '%s, %sb, %s',
+            $this->getPath(),
+            number_format($this->getSize(), 0, '.', ' '),
+            $this->getModified()->format('d.m.y H:i:s')
+        );
+    }
 }

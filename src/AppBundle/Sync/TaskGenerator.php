@@ -8,6 +8,8 @@ use AppBundle\Sync\Entity\Task\Delete;
 use AppBundle\Sync\Entity\Task\Update;
 use AppBundle\Sync\Entity\TaskCollection;
 use AppBundle\Sync\Entity\File;
+use Psr\Log\NullLogger;
+use Psr\Log\LoggerInterface;
 
 class TaskGenerator
 {
@@ -15,6 +17,10 @@ class TaskGenerator
      * @var string Path for slave file
      */
     protected $slavePathTpl;
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     public function setSlavePathTpl($path)
     {
@@ -24,7 +30,10 @@ class TaskGenerator
     public function getSlavePathTpl()
     {
         if ($this->slavePathTpl == '') {
-            throw new TaskException('You must set the Slave Path template', TaskException::SLAVE_PATH_NOT_SET);
+            throw new TaskException(
+                '[TaskGenerator] You must set the Slave Path template',
+                TaskException::SLAVE_PATH_NOT_SET
+            );
         }
 
         return $this->slavePathTpl;
@@ -46,6 +55,8 @@ class TaskGenerator
 
         $tasks = new TaskCollection();
 
+        $logger = $this->getLogger();
+
         /**
          * Add and Update
          *
@@ -56,6 +67,7 @@ class TaskGenerator
 
         foreach ($diff as $uid => $hash) {
             $masterFile = $master->getByUid($uid);
+            $slaveFile  = $slave->getByUid($uid);
 
             $new = !isset($slaveHash[$uid]);
             if ($new) {
@@ -68,6 +80,15 @@ class TaskGenerator
             $task->setDestPath($this->getSlavePath($uid));
 
             $tasks->addTask($task);
+
+            $logger->info(
+                sprintf(
+                    '[TaskGenerator] Generated "%s" task based on files: S[%s] D[%s]',
+                    $task->getName(),
+                    $masterFile,
+                    $slaveFile
+                )
+            );
         }
 
         // Delete
@@ -86,6 +107,14 @@ class TaskGenerator
             $task->setDestPath($slaveFile->getPath());
 
             $tasks->addTask($task);
+
+            $logger->info(
+                sprintf(
+                    '[TaskGenerator] Generated "%s" task based on file: D[%s]',
+                    $task->getName(),
+                    $slaveFile
+                )
+            );
         }
 
         return $tasks;
@@ -103,5 +132,25 @@ class TaskGenerator
         }
 
         return $hash;
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    protected function getLogger()
+    {
+        if (is_null($this->logger)) {
+            return new NullLogger();
+        }
+
+        return $this->logger;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 }

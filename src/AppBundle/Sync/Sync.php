@@ -79,6 +79,7 @@ class Sync
         try {
             $generator = new TaskGenerator($masterFiles, $slaveFiles);
             $generator->setSlavePathTpl($this->getSlavePathTpl());
+            $generator->setLogger($logger);
 
             $tasks = $generator->handle($masterFiles, $slaveFiles);
             $logger->info(sprintf('Generated %d tasks', count($tasks)));
