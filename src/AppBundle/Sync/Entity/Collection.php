@@ -55,7 +55,7 @@ abstract class Collection implements \Iterator, \Countable
         return isset($this->items[$key]);
     }
 
-    public function add(Entity $item, $key = null)
+    public function add($item, $key = null)
     {
         if (is_null($key)) {
             $this->items[] = $item;

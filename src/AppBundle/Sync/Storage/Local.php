@@ -18,14 +18,20 @@ class Local extends AbstractStorage
     public function put($sourcePath, $destPath)
     {
         if (!is_file($sourcePath)) {
-            throw new LocalStorageException(sprintf('File %s not found', $sourcePath), LocalStorageException::FILE_NOT_FOUND);
+            throw new LocalStorageException(
+                sprintf('File %s not found', $sourcePath),
+                LocalStorageException::FILE_NOT_FOUND
+            );
         }
 
         $this->ensureDirectory(dirname($destPath));
 
         $result = @copy($sourcePath, $destPath);
         if (!$result) {
-            throw new LocalStorageException(sprintf('Copy failed: %s', $sourcePath), LocalStorageException::OPERATION_FAIL);
+            throw new LocalStorageException(
+                sprintf('Copy failed: %s', $sourcePath),
+                LocalStorageException::OPERATION_FAIL
+            );
         }
     }
 
@@ -37,12 +43,18 @@ class Local extends AbstractStorage
     public function delete($path)
     {
         if (!is_file($path)) {
-            throw new LocalStorageException(sprintf('File %s not found', $path), LocalStorageException::FILE_NOT_FOUND);
+            throw new LocalStorageException(
+                sprintf('File %s not found', $path),
+                LocalStorageException::FILE_NOT_FOUND
+            );
         }
 
         $result = unlink($path);
         if (!$result) {
-            throw new LocalStorageException(sprintf('Delete failed: %s', $path), LocalStorageException::OPERATION_FAIL);
+            throw new LocalStorageException(
+                sprintf('Delete failed: %s', $path),
+                LocalStorageException::OPERATION_FAIL
+            );
         }
     }
 
@@ -72,8 +84,7 @@ class Local extends AbstractStorage
         /**
          * @var \SplFileInfo $rawFile
          */
-        foreach ($fileIterator as $rawFile)
-        {
+        foreach ($fileIterator as $rawFile) {
             $modified = new DateTime('@' . $rawFile->getMTime());
 
             $file = new File();

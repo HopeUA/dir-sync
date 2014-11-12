@@ -53,7 +53,8 @@ class FileCollection extends Collection
      * @param File $file
      * @param null $key
      */
-    public function add(File $file, $key = null) {
+    public function add($file, $key = null)
+    {
         $this->addToIndex($file);
 
         parent::add($file, $key);
@@ -81,7 +82,8 @@ class FileCollection extends Collection
      *
      * @return null|File
      */
-    public function getByUid($uid) {
+    public function getByUid($uid)
+    {
         if (!isset($this->index[$uid])) {
             return null;
         }

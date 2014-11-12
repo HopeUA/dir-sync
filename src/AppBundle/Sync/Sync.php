@@ -57,10 +57,18 @@ class Sync
         $logger->info('START Synchronization');
 
         try {
-            $masterFiles = $this->getFiles($this->getMasterStorage(), $this->getMasterPath(), $this->getMasterFilters());
+            $masterFiles = $this->getFiles(
+                $this->getMasterStorage(),
+                $this->getMasterPath(),
+                $this->getMasterFilters()
+            );
             $logger->info(sprintf('Master files count: %d', count($masterFiles)));
 
-            $slaveFiles  = $this->getFiles($this->getSlaveStorage(), $this->getSlavePath(), $this->getSlaveFilters());
+            $slaveFiles = $this->getFiles(
+                $this->getSlaveStorage(),
+                $this->getSlavePath(),
+                $this->getSlaveFilters()
+            );
             $logger->info(sprintf('Slave files count: %d', count($slaveFiles)));
         } catch (FilterException $e) {
             $logger->error($e->getMessage());

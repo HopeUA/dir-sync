@@ -8,8 +8,15 @@ use DateTime;
 
 class Lto extends AbstractStorage
 {
-    private $regList = "~(?P<size>[\d,]+) +B +(?P<date>\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}) +(?P<path>[^ ]+) +Never +Archive +Date: +(?P<archive_date>\d{2}\/\d{2}\/\d{2})~";
+    private $regList;
 
+    public function __construct()
+    {
+        $regExp = "~(?P<size>[\d,]+) +B +(?P<date>\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}) ".
+            "+(?P<path>[^ ]+) +Never +Archive +Date: +(?P<archive_date>\d{2}\/\d{2}\/\d{2})~";
+
+        $this->regList = $regExp;
+    }
     /**
      * Put a file
      *
