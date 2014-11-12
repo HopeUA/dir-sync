@@ -1,6 +1,8 @@
 Directory Synchronizer
 ======================
 
+[![Test passing](https://travis-ci.org/HopeUA/dir-sync.svg?branch=master)](https://travis-ci.org/HopeUA/dir-sync)
+
 Console tool to synchronize files in two directories.
 
 ### Usage
