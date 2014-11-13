@@ -63,10 +63,26 @@ class LocalTest extends \PHPUnit_Framework_TestCase
         // Replace existing file
         $storage->put(vfsStream::url($source1), vfsStream::url($dest1));
         $this->assertTrue($this->root->hasChild($dest1));
+        $this->assertEquals(
+            filemtime(vfsStream::url($source1)),
+            filemtime(vfsStream::url($dest1))
+        );
+        $this->assertEquals(
+            filesize(vfsStream::url($source1)),
+            filesize(vfsStream::url($dest1))
+        );
 
         // Create new file and dir
         $storage->put(vfsStream::url($source2), vfsStream::url($dest2));
         $this->assertTrue($this->root->hasChild($dest2));
+        $this->assertEquals(
+            filemtime(vfsStream::url($source2)),
+            filemtime(vfsStream::url($dest2))
+        );
+        $this->assertEquals(
+            filesize(vfsStream::url($source2)),
+            filesize(vfsStream::url($dest2))
+        );
     }
 
     /**

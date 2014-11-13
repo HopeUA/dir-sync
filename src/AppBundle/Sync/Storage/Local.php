@@ -33,6 +33,14 @@ class Local extends AbstractStorage
                 LocalStorageException::OPERATION_FAIL
             );
         }
+
+        $result = @touch($destPath, filemtime($sourcePath));
+        if (!$result) {
+            throw new LocalStorageException(
+                sprintf('Touch failed: %s', $destPath),
+                LocalStorageException::OPERATION_FAIL
+            );
+        }
     }
 
     /**
