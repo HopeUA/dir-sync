@@ -1,14 +1,3 @@
-parameters:
-    app.logger: file
-    app.name: app
-
-    file.log.path: %kernel.logs_dir%/sync.log
-
-    elastic.log.index: sync
-    elastic.log.type: app
-    elastic.client.config:
-        host: localhost
-
 services:
     # Logs
     app.logger:
