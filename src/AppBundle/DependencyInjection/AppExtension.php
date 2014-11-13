@@ -19,6 +19,8 @@ class AppExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $this->setLogger($container);
     }
 
     protected function applyConfig($type, ContainerBuilder $container, $config)
@@ -39,5 +41,11 @@ class AppExtension extends Extension
             $pathTpl = $config['path_tpl'];
             $container->setParameter($type . '.path_tpl', $pathTpl);
         }
+    }
+
+    protected function setLogger(ContainerBuilder $container)
+    {
+        $logger = $container->getParameter('app.logger');
+        $container->setAlias('log.handler', $logger . '.log.handler');
     }
 }

@@ -6,6 +6,10 @@ parameters:
     debug_redirects:        false
 
     # Sync parameters
+    app.name: ~
+
+    app.logger: ~
+
     app.master.storage:
     app.master.path:
     app.master.filters:
@@ -14,3 +18,5 @@ parameters:
     app.slave.path:
     app.slave.path_tpl:
     app.slave.filters:
+
+
