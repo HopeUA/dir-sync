@@ -36,7 +36,10 @@ class AppExtensionTest extends \PHPUnit_Framework_TestCase
             ],
         ];
 
-        $this->extension->load($config, $container = $this->getContainer());
+        $container = $this->getContainer();
+        $container->setParameter('app.logger', 'test_logger');
+
+        $this->extension->load($config, $container);
 
         // Test parameters
         $parameters = [
