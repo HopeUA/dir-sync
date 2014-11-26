@@ -44,7 +44,9 @@ class Lto implements StorageInterface
         $result  = shell_exec($command);
 
         if (strpos($result, 'finished without failure') === false) {
-            throw new StorageException($result);
+            throw new StorageException(
+                sprintf('Archive error while processing command "%s". Server response: %s', $command, $result)
+            );
         }
     }
 
@@ -56,8 +58,13 @@ class Lto implements StorageInterface
         $command = sprintf('dsmc delete archive %s -noprompt', $path);
         $result  = shell_exec($command);
 
-        if (strpos($result, 'finished without failure') === false) {
-            throw new StorageException($result);
+        if (
+            strpos($result, 'finished without failure')         === false &&
+            strpos($result, 'No objects on server match query') === false
+        ) {
+            throw new StorageException(
+                sprintf('Delete error while processing command "%s". Server response: %s', $command, $result)
+            );
         }
     }
 
@@ -70,6 +77,10 @@ class Lto implements StorageInterface
         $result  = shell_exec($command);
 
         $fc = new FileCollection();
+
+        if (strpos($result, 'No files matching search criteria were found') !== false) {
+            return $fc;
+        }
 
         $lines = explode("\n", $result);
         foreach ($lines as $line) {
