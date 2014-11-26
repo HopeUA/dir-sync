@@ -1,7 +1,9 @@
 Directory Synchronizer
 ======================
 
-[![Test passing](https://travis-ci.org/HopeUA/dir-sync.svg?branch=master)](https://travis-ci.org/HopeUA/dir-sync)
+[![Test passing](https://img.shields.io/travis/HopeUA/dir-sync.svg?style=flat-square)](https://travis-ci.org/HopeUA/dir-sync)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/HopeUA/dir-sync.svg?style=flat-square)](https://scrutinizer-ci.com/g/HopeUA/dir-sync/?branch=master)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/HopeUA/dir-sync.svg?style=flat-square)](https://scrutinizer-ci.com/g/HopeUA/dir-sync/?branch=master)
 
 Console tool to synchronize files in two directories.
 
