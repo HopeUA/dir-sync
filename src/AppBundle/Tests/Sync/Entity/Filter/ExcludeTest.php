@@ -4,6 +4,7 @@ namespace AppBundle\Tests\Sync\Entity\Filter;
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\Filter\Exclude;
 use org\bovigo\vfs\vfsStream;
+use Symfony\Component\Debug\ErrorHandler;
 
 class ExcludeTest extends \PHPUnit_Framework_TestCase
 {

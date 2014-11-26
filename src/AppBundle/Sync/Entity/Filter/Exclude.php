@@ -3,6 +3,7 @@ namespace AppBundle\Sync\Entity\Filter;
 
 use AppBundle\Exception\ExcludeFilterException;
 use AppBundle\Sync\Entity\File;
+use \ErrorException;
 
 /**
  * Filter files by list of excluded elements
@@ -37,10 +38,11 @@ class Exclude implements FilterInterface
      */
     protected function load()
     {
-        $result = @file_get_contents($this->getPath());
+        $result = file_get_contents($this->getPath());
+
         if (false === $result) {
             throw new ExcludeFilterException(
-                sprintf('[ExludeFilter] Error while loading file %s', $result),
+                sprintf('[ExludeFilter] Error while loading file %s', $this->getPath()),
                 ExcludeFilterException::MISSING_FILE
             );
         }
