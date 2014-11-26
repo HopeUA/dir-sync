@@ -1,8 +1,16 @@
 filter:
+    paths:
+        - src/*
     excluded_paths:
         - src/AppBundle/Tests/*
 
 tools:
+    php_analyzer: true
     external_code_coverage:
         timeout: 300
         runs: 1
+
+checks:
+    php:
+        code_rating: true
+        duplication: true

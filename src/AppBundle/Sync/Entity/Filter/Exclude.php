@@ -3,7 +3,6 @@ namespace AppBundle\Sync\Entity\Filter;
 
 use AppBundle\Exception\ExcludeFilterException;
 use AppBundle\Sync\Entity\File;
-use \ErrorException;
 
 /**
  * Filter files by list of excluded elements
