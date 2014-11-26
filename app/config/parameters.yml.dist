@@ -6,13 +6,13 @@ parameters:
     debug_redirects:        false
 
     # Sync parameters
-    app.master.storage:
-    app.master.path:
-    app.master.filters:
+    app.master.storage: local
+    app.master.path: /tmp
+    app.master.filters: []
 
-    app.slave.storage:
-    app.slave.path:
-    app.slave.path_tpl:
-    app.slave.filters:
+    app.slave.storage: local
+    app.slave.path: /tmp
+    app.slave.path_tpl: /
+    app.slave.filters: []
 
 
