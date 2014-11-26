@@ -29,6 +29,11 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+
+        $localFile = __DIR__ . '/config/local_' . $this->getEnvironment() . '.yml';
+        if (is_file($localFile)) {
+            $loader->load($localFile);
+        }
     }
 
     public function getCacheDir()
