@@ -1,3 +1,2 @@
-composer install --optimize-autoloader --no-dev
+composer install --optimize-autoloader --no-dev --no-interaction
 php app/console cache:clear --env=prod
-php app/console sync:run --env=prod
