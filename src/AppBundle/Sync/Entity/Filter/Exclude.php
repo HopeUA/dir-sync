@@ -25,7 +25,7 @@ class Exclude implements FilterInterface
      */
     public function valid(File $file)
     {
-        if (is_null($this->elements)) {
+        if (!is_array($this->elements)) {
             $this->load();
         }
 
