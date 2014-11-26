@@ -4,6 +4,11 @@ namespace AppBundle\Sync\Entity;
 use AppBundle\Exception\FilterException;
 use AppBundle\Sync\Entity\Filter\FilterInterface;
 
+/**
+ * Collection of Files
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class FileCollection extends Collection
 {
     /**
@@ -25,6 +30,8 @@ class FileCollection extends Collection
      * Filter the collection
      *
      * @param array $filters Array of Filter objects
+     *
+     * @throws FilterException
      */
     public function filter(array $filters)
     {
@@ -51,7 +58,7 @@ class FileCollection extends Collection
      * Add file and update index
      *
      * @param File $file
-     * @param null $key
+     * @param string $key
      */
     public function add($file, $key = null)
     {
@@ -63,7 +70,7 @@ class FileCollection extends Collection
     /**
      * Del file and update index
      *
-     * @param $key
+     * @param string $key  File key
      */
     public function del($key)
     {
@@ -94,6 +101,7 @@ class FileCollection extends Collection
         }
 
         $key = array_pop($files);
+
         return $this->get($key);
     }
 

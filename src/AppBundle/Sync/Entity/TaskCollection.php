@@ -3,10 +3,15 @@ namespace AppBundle\Sync\Entity;
 
 use AppBundle\Sync\Entity\Task;
 
+/**
+ * Collection of Tasks
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class TaskCollection extends Collection
 {
     /**
-     * Adds Task to collection
+     * Add Task to collection
      *
      * @param Task $task
      */

@@ -4,6 +4,11 @@ namespace AppBundle\Tests\DependencyInjection;
 use AppBundle\DependencyInjection\AppExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * App Extension tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class AppExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**

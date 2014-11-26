@@ -7,6 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use org\bovigo\vfs\vfsStream;
 
+/**
+ * Sync Command tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class SyncCommandTest extends WebTestCase
 {
     public function setUp()

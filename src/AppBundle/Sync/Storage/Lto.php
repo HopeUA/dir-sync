@@ -6,10 +6,21 @@ use AppBundle\Sync\Entity\FileCollection;
 use AppBundle\Exception\StorageException;
 use DateTime;
 
-class Lto extends AbstractStorage
+/**
+ * LTO app storage
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
+class Lto implements StorageInterface
 {
+    /**
+     * @var string  Regex pattern for file list
+     */
     private $regList;
 
+    /**
+     * Init the regList pattern
+     */
     public function __construct()
     {
         $regExp = "~(?P<size>[\d,]+) +B +(?P<date>\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}:\d{2}) ".
@@ -17,11 +28,9 @@ class Lto extends AbstractStorage
 
         $this->regList = $regExp;
     }
+
     /**
-     * Put a file
-     *
-     * @param $sourcePath
-     * @param $destPath
+     * {@inheritdoc}
      */
     public function put($sourcePath, $destPath)
     {
@@ -40,9 +49,7 @@ class Lto extends AbstractStorage
     }
 
     /**
-     * Delete a file
-     *
-     * @param $path
+     * {@inheritdoc}
      */
     public function delete($path)
     {
@@ -55,11 +62,7 @@ class Lto extends AbstractStorage
     }
 
     /**
-     * Collects data from lto
-     *
-     * @param string $directory
-     *
-     * @return FileCollection
+     * {@inheritdoc}
      */
     public function listContents($directory = '')
     {

@@ -3,44 +3,21 @@ namespace AppBundle\Sync\Entity\Task;
 
 use AppBundle\Sync\Entity\Task;
 
-class Update extends Task
+/**
+ * "Update" task
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
+class Update extends Add
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $name = 'update';
-    protected $sourcePath;
-    protected $destPath;
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
-    public function getSourcePath()
-    {
-        return $this->sourcePath;
-    }
-
-    /**
-     * @param mixed $sourcePath
-     */
-    public function setSourcePath($sourcePath)
-    {
-        $this->sourcePath = $sourcePath;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDestPath()
-    {
-        return $this->destPath;
-    }
-
-    /**
-     * @param mixed $destPath
-     */
-    public function setDestPath($destPath)
-    {
-        $this->destPath = $destPath;
-    }
-
     public function getMessageSuccess()
     {
         return sprintf('Updated %s', basename($this->getSourcePath()));

@@ -6,6 +6,11 @@ use AppBundle\Sync\Entity\Filter\Exclude;
 use org\bovigo\vfs\vfsStream;
 use Symfony\Component\Debug\ErrorHandler;
 
+/**
+ * Exclude filter tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class ExcludeTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()

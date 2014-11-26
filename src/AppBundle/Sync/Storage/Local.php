@@ -7,13 +7,15 @@ use FilesystemIterator;
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;
 
-class Local extends AbstractStorage
+/**
+ * Local app storage
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
+class Local implements StorageInterface
 {
     /**
-     * Put a file
-     *
-     * @param $sourcePath
-     * @param $destPath
+     * {@inheritdoc}
      */
     public function put($sourcePath, $destPath)
     {
@@ -52,9 +54,7 @@ class Local extends AbstractStorage
     }
 
     /**
-     * Delete a file
-     *
-     * @param $path
+     * {@inheritdoc}
      */
     public function delete($path)
     {
@@ -75,11 +75,7 @@ class Local extends AbstractStorage
     }
 
     /**
-     * Collects files from directory
-     *
-     * @param string $directory
-     *
-     * @return FileCollection
+     * {@inheritdoc}
      */
     public function listContents($directory = '')
     {
@@ -119,6 +115,7 @@ class Local extends AbstractStorage
      * Ensure the directory exists.
      *
      * @param   string  $dir  Directory path
+     *
      * @return  string  Real path to dir
      */
     protected function ensureDirectory($dir)
@@ -127,7 +124,7 @@ class Local extends AbstractStorage
             $result = mkdir($dir, 0755, true);
             if (!$result) {
                 throw new LocalStorageException(
-                    sprintf('Can\t create directory %s', $dir),
+                    sprintf('Can\'t create directory %s', $dir),
                     LocalStorageException::OPERATION_FAIL
                 );
             }

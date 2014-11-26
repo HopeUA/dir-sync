@@ -6,6 +6,11 @@ use AppBundle\Sync\Entity\FileCollection;
 use AppBundle\Sync\TaskGenerator;
 use Nelmio\Alice\Loader\Yaml;
 
+/**
+ * Task Generator tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class TaskGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     public function testSuccessHandle()

@@ -6,6 +6,11 @@ use AppBundle\Sync\Entity\File;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
+/**
+ * Local Storage tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class LocalTest extends \PHPUnit_Framework_TestCase
 {
     /**

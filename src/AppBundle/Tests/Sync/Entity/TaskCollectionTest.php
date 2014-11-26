@@ -4,6 +4,11 @@ namespace AppBundle\Tests\Sync\Entity;
 use AppBundle\Sync\Entity\Task;
 use AppBundle\Sync\Entity\TaskCollection;
 
+/**
+ * Task Collection tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class TaskCollectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testAdd()

@@ -4,6 +4,11 @@ namespace AppBundle\Tests\Sync\Entity\Filter;
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\Filter\Path;
 
+/**
+ * Path filter tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class PathTest extends \PHPUnit_Framework_TestCase
 {
     /**

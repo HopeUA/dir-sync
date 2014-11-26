@@ -5,6 +5,11 @@ use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;
 use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
+/**
+ * File Collection tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class FileCollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**

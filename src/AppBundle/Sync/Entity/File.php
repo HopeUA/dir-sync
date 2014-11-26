@@ -3,10 +3,24 @@ namespace AppBundle\Sync\Entity;
 
 use DateTime;
 
+/**
+ * File entity
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class File extends Entity
 {
+    /**
+     * @var string  Unique id of the file
+     */
     protected $uid;
+    /**
+     * @var string  File path
+     */
     protected $path;
+    /**
+     * @var int  File size
+     */
     protected $size;
     /**
      * @var DateTime Modification date
@@ -30,7 +44,7 @@ class File extends Entity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPath()
     {
@@ -38,7 +52,7 @@ class File extends Entity
     }
 
     /**
-     * @param mixed $path
+     * @param string $path
      */
     public function setPath($path)
     {
@@ -46,7 +60,7 @@ class File extends Entity
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getSize()
     {
@@ -54,7 +68,7 @@ class File extends Entity
     }
 
     /**
-     * @param mixed $size
+     * @param int $size
      */
     public function setSize($size)
     {
@@ -62,7 +76,7 @@ class File extends Entity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUid()
     {
@@ -70,13 +84,18 @@ class File extends Entity
     }
 
     /**
-     * @param mixed $uid
+     * @param string $uid
      */
     public function setUid($uid)
     {
         $this->uid = $uid;
     }
 
+    /**
+     * Serialize file to string
+     *
+     * @return string
+     */
     public function __toString()
     {
         return sprintf(

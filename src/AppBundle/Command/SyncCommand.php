@@ -5,8 +5,16 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Main command of Sync App. Runs the directory synchronization
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class SyncCommand extends ContainerAwareCommand
 {
+    /**
+     * Sets name and description of the command
+     */
     protected function configure()
     {
         $this
@@ -15,6 +23,14 @@ class SyncCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * Executes the current command.
+     *
+     * @param InputInterface  $input    Input interface
+     * @param OutputInterface $output   Output interface
+     *
+     * @return int 0 if everything went fine
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sync = $this->getContainer()->get('app');
@@ -26,8 +42,15 @@ class SyncCommand extends ContainerAwareCommand
         $sync->setSlaveFilters($slaveFilters);
 
         $sync->run();
+
+        return 0;
     }
 
+    /**
+     * @param string $type  of the filters
+     *
+     * @return array  of the filter objects
+     */
     protected function getFilters($type)
     {
         $filters   = [];
@@ -35,7 +58,7 @@ class SyncCommand extends ContainerAwareCommand
 
         $filterConfigs = $container->getParameter($type . '.filters');
 
-        if (is_null($filterConfigs)) {
+        if (!is_array($filterConfigs)) {
             return [];
         }
 

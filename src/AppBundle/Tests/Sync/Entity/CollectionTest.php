@@ -1,6 +1,11 @@
 <?php
 namespace AppBundle\Tests\Sync\Entity;
 
+/**
+ * Collection tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class CollectionTest extends \PHPUnit_Framework_TestCase
 {
     public function testInit()

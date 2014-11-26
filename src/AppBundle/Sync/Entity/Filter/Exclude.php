@@ -7,6 +7,8 @@ use \ErrorException;
 
 /**
  * Filter files by list of excluded elements
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
  */
 class Exclude implements FilterInterface
 {
@@ -65,9 +67,11 @@ class Exclude implements FilterInterface
     }
 
     /**
+     * Get the path to file with excludes
+     *
      * @throws ExcludeFilterException
      *
-     * @return string
+     * @return string File path
      */
     public function getPath()
     {
@@ -83,6 +87,8 @@ class Exclude implements FilterInterface
     }
 
     /**
+     * Set the path to file with excludes
+     *
      * @param string $path
      */
     public function setPath($path)

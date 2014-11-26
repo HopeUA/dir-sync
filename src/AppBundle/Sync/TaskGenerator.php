@@ -11,6 +11,11 @@ use AppBundle\Sync\Entity\File;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Compare two FileCollections and generate tasks
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class TaskGenerator
 {
     /**
@@ -22,11 +27,19 @@ class TaskGenerator
      */
     protected $logger;
 
+    /**
+     * @param $path
+     */
     public function setSlavePathTpl($path)
     {
         $this->slavePathTpl = $path;
     }
 
+    /**
+     * @return string
+     *
+     * @throws TaskException
+     */
     public function getSlavePathTpl()
     {
         if ($this->slavePathTpl == '') {
@@ -39,6 +52,13 @@ class TaskGenerator
         return $this->slavePathTpl;
     }
 
+    /**
+     * Get the slave path form template
+     *
+     * @param string $uid  File uid
+     *
+     * @return string  Path to file
+     */
     public function getSlavePath($uid)
     {
         $path = $this->getSlavePathTpl();
@@ -48,6 +68,14 @@ class TaskGenerator
         return $path;
     }
 
+    /**
+     * Compare collections and create tasks
+     *
+     * @param FileCollection $master
+     * @param FileCollection $slave
+     *
+     * @return TaskCollection
+     */
     public function handle(FileCollection $master, FileCollection $slave)
     {
         $masterHash = $this->getHash($master);
@@ -120,6 +148,13 @@ class TaskGenerator
         return $tasks;
     }
 
+    /**
+     * Calculates hashes for FileCollection
+     *
+     * @param FileCollection $files
+     *
+     * @return array  of hashes
+     */
     private function getHash(FileCollection $files)
     {
         $hash = [];

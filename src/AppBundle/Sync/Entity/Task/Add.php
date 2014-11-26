@@ -3,14 +3,30 @@ namespace AppBundle\Sync\Entity\Task;
 
 use AppBundle\Sync\Entity\Task;
 
+/**
+ * "Add" task
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class Add extends Task
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $name = 'add';
+    /**
+     * @var string  Source path
+     */
     protected $sourcePath;
+    /**
+     * @var string  Dest path
+     */
     protected $destPath;
 
     /**
-     * @return mixed
+     * Get source path
+     *
+     * @return string
      */
     public function getSourcePath()
     {
@@ -18,7 +34,9 @@ class Add extends Task
     }
 
     /**
-     * @param mixed $sourcePath
+     * Set source path
+     *
+     * @param string $sourcePath
      */
     public function setSourcePath($sourcePath)
     {
@@ -26,7 +44,9 @@ class Add extends Task
     }
 
     /**
-     * @return mixed
+     * Get dest path
+     *
+     * @return string
      */
     public function getDestPath()
     {
@@ -34,13 +54,18 @@ class Add extends Task
     }
 
     /**
-     * @param mixed $destPath
+     * Set dest path
+     *
+     * @param string $destPath
      */
     public function setDestPath($destPath)
     {
         $this->destPath = $destPath;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMessageSuccess()
     {
         return sprintf('Copied %s', basename($this->getSourcePath()));

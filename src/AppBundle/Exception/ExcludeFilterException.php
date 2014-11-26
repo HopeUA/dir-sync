@@ -1,6 +1,11 @@
 <?php
 namespace AppBundle\Exception;
 
+/**
+ * Exception for Exclude filter
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class ExcludeFilterException extends FilterException
 {
     const MISSING_FILE   = 10;

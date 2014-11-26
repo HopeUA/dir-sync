@@ -4,8 +4,16 @@ namespace AppBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * Sync configuration
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();

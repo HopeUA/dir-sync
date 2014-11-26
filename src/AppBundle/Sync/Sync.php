@@ -4,11 +4,16 @@ namespace AppBundle\Sync;
 use AppBundle\Exception\FilterException;
 use AppBundle\Exception\StorageException;
 use AppBundle\Exception\TaskException;
-use AppBundle\Sync\Storage\AbstractStorage as Storage;
+use AppBundle\Sync\Storage\StorageInterface as Storage;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 
+/**
+ * Sync app
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class Sync
 {
     /**

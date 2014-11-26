@@ -6,11 +6,16 @@ use AppBundle\Sync\Entity\Task\Add;
 use AppBundle\Sync\Entity\Task\Delete;
 use AppBundle\Sync\Entity\Task\Update;
 
+/**
+ * Task Processor tests
+ *
+ * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
+ */
 class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
     public function testAdd()
     {
-        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\AbstractStorage');
+        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
         $storage->expects($this->once())
                 ->method('put');
 
@@ -22,7 +27,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\AbstractStorage');
+        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
         $storage->expects($this->once())
                 ->method('put');
 
@@ -34,7 +39,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
-        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\AbstractStorage');
+        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
         $storage->expects($this->once())
                 ->method('delete');
 
@@ -50,7 +55,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidTask()
     {
-        $storage   = $this->getMock('\\AppBundle\\Sync\\Storage\\AbstractStorage');
+        $storage   = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
         $processor = new Processor($storage);
         $task      = $this->getMock('\\AppBundle\\Sync\\Entity\\Task');
 
