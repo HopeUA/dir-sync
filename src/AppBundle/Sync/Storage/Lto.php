@@ -77,6 +77,10 @@ class Lto implements StorageInterface
                 $size     = str_replace(',', '', $match['size']);
                 $modified = DateTime::createFromFormat('m/d/Y H:i:s', $match['date']);
 
+                if (false === $modified) {
+                    continue;
+                }
+
                 $file = new File();
 
                 $file->setUid(basename($match['path']));

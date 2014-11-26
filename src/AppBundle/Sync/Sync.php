@@ -82,7 +82,7 @@ class Sync
         }
 
         try {
-            $generator = new TaskGenerator($masterFiles, $slaveFiles);
+            $generator = new TaskGenerator();
             $generator->setSlavePathTpl($this->getSlavePathTpl());
             $generator->setLogger($logger);
 
