@@ -116,7 +116,7 @@ class Sync
      * Gets filtered file list for selected storage
      *
      * @param Storage $storage
-     * @param         $path
+     * @param string  $path
      * @param array   $filters
      *
      * @return Entity\FileCollection

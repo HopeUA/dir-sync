@@ -28,7 +28,7 @@ class TaskGenerator
     protected $logger;
 
     /**
-     * @param $path
+     * @param string $path
      */
     public function setSlavePathTpl($path)
     {

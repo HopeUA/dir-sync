@@ -16,9 +16,9 @@ interface StorageInterface
      *
      * @param string $directory
      *
-     * @return FileCollection
-     *
      * @throws StorageException
+     *
+     * @return FileCollection
      */
     public function listContents($directory = '');
 
@@ -29,6 +29,8 @@ interface StorageInterface
      * @param string $destPath
      *
      * @throws StorageException
+     *
+     * @return void
      */
     public function put($sourcePath, $destPath);
 
@@ -38,6 +40,8 @@ interface StorageInterface
      * @param string $path  File path
      *
      * @throws StorageException
+     *
+     * @return void
      */
     public function delete($path);
 }
