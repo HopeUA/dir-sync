@@ -35,22 +35,6 @@ class Local implements StorageInterface
                 LocalStorageException::OPERATION_FAIL
             );
         }
-
-        $sourceModificationTime = filemtime($sourcePath);
-        if (false === $sourceModificationTime) {
-            throw new LocalStorageException(
-                sprintf('Can\'t get modification time of %s', $sourcePath),
-                LocalStorageException::OPERATION_FAIL
-            );
-        }
-
-        $result = touch($destPath, $sourceModificationTime);
-        if (!$result) {
-            throw new LocalStorageException(
-                sprintf('Touch failed: %s', $destPath),
-                LocalStorageException::OPERATION_FAIL
-            );
-        }
     }
 
     /**

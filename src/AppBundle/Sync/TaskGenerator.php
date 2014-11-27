@@ -163,7 +163,7 @@ class TaskGenerator
          * @var File $file
          */
         foreach ($files as $file) {
-            $hash[$file->getUid()] = md5($file->getUid() . $file->getSize() . $file->getModified()->format('dmyHis'));
+            $hash[$file->getUid()] = md5($file->getUid() . $file->getSize());
         }
 
         return $hash;
