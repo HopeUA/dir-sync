@@ -59,8 +59,8 @@ class Lto implements StorageInterface
         $result  = shell_exec($command);
 
         if (
-            strpos($result, 'finished without failure')         === false &&
-            strpos($result, 'No objects on server match query') === false
+            strpos($result, 'No objects on server match query')            === false &&
+            strpos($result, 'Total number of objects deleted:          1') === false
         ) {
             throw new StorageException(
                 sprintf('Delete error while processing command "%s". Server response: %s', $command, $result)
