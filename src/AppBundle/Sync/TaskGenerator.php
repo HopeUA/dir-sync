@@ -82,6 +82,8 @@ class TaskGenerator
         $slaveHash  = $this->getHash($slave);
 
         $tasks = new TaskCollection();
+        $createTaskCounter = 0;
+        $deleteTaskCounter = 0;
 
         $logger = $this->getLogger();
 
@@ -117,6 +119,8 @@ class TaskGenerator
                     $slaveFile
                 )
             );
+
+            $createTaskCounter++;
         }
 
         // Delete
@@ -142,6 +146,16 @@ class TaskGenerator
                     $task->getName(),
                     $slaveFile
                 )
+            );
+
+            $deleteTaskCounter++;
+        }
+
+        // Halt on huge delete action
+        $deletePart = $deleteTaskCounter / ($deleteTaskCounter + $createTaskCounter) * 100;
+        if ($deletePart > 5) {
+            throw new TaskException(
+                'Huge amount of DELETE tasks. Exiting.'
             );
         }
 
