@@ -38,8 +38,11 @@ services:
     filter.path:
         class: AppBundle\Sync\Entity\Filter\Path
         scope: prototype
-    filter.exclude:
-        class: AppBundle\Sync\Entity\Filter\Exclude
+    filter.excludeEpisodes:
+        class: AppBundle\Sync\Entity\Filter\ExcludeEpisodes
+        scope: prototype
+    filter.excludeShows:
+        class: AppBundle\Sync\Entity\Filter\ExcludeShows
         scope: prototype
 
     # Main App
