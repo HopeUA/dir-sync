@@ -4,6 +4,7 @@ namespace AppBundle\Sync\Entity\Filter;
 use AppBundle\Exception\ExcludeFilterException;
 use AppBundle\Sync\Entity\File;
 
+
 /**
  * Filter files by list of excluded elements
  *

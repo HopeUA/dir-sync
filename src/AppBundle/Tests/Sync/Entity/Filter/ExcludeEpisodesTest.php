@@ -2,16 +2,15 @@
 namespace AppBundle\Tests\Sync\Entity\Filter;
 
 use AppBundle\Sync\Entity\File;
-use AppBundle\Sync\Entity\Filter\Exclude;
+use AppBundle\Sync\Entity\Filter\ExcludeEpisodes;
 use org\bovigo\vfs\vfsStream;
-use Symfony\Component\Debug\ErrorHandler;
 
 /**
  * Exclude filter tests
  *
  * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
  */
-class ExcludeTest extends \PHPUnit_Framework_TestCase
+class ExcludeEpisodesTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
@@ -22,7 +21,7 @@ class ExcludeTest extends \PHPUnit_Framework_TestCase
         // Init virtual FS
         vfsStream::setup('root', null, $tree);
 
-        $filter = new Exclude();
+        $filter = new ExcludeEpisodes();
         $filter->setPath(vfsStream::url('root/exclude.list'));
 
         foreach ($files as $fileName) {
@@ -40,7 +39,7 @@ class ExcludeTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnsetPath()
     {
-        $filter = new Exclude();
+        $filter = new ExcludeEpisodes();
         $filter->valid(new File());
     }
 
@@ -50,7 +49,7 @@ class ExcludeTest extends \PHPUnit_Framework_TestCase
      */
     public function testMissingFile()
     {
-        $filter = new Exclude();
+        $filter = new ExcludeEpisodes();
         $filter->setPath('/missing/path');
 
         $filter->valid(new File());
@@ -67,7 +66,7 @@ class ExcludeTest extends \PHPUnit_Framework_TestCase
         // Init virtual FS
         vfsStream::setup('root', null, $tree);
 
-        $filter = new Exclude();
+        $filter = new ExcludeEpisodes();
         $filter->setPath(vfsStream::url('root/exclude.list'));
 
         $filter->valid(new File());
@@ -84,7 +83,7 @@ class ExcludeTest extends \PHPUnit_Framework_TestCase
         // Init virtual FS
         vfsStream::setup('root', null, $tree);
 
-        $filter = new Exclude();
+        $filter = new ExcludeEpisodes();
         $filter->setPath(vfsStream::url('root/exclude.list'));
 
         $filter->valid(new File());

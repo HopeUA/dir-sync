@@ -9,7 +9,7 @@ use AppBundle\Sync\Entity\File;
  *
  * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
  */
-class ExcludeEpidodes implements FilterInterface
+class ExcludeEpisodes implements FilterInterface
 {
     /**
      * @var string  Path to file with excludes

@@ -39,6 +39,7 @@ class SyncCommandTest extends WebTestCase
         $this->assertFalse($fs->hasChild('dest/TEST/TEST00413.mov'));
         $this->assertFalse($fs->hasChild('dest/TEST/TEST00513.mov'));
         $this->assertTrue($fs->hasChild('dest/ZZZZ/ZZZZ00113.mov'));
+        $this->assertFalse($fs->hasChild('dest/QQQQ/QQQQ00113.mov'));
     }
 
     protected function getDirTree()
@@ -63,7 +64,15 @@ class SyncCommandTest extends WebTestCase
                     'source' => [
                         'ZZZZ00313.mov' => 'test source content',
                     ],
-                ]
+                ],
+                'QQQQ' => [
+                    'stream' => [
+                        'QQQQ00113.mov' => 'test stream content',
+                    ],
+                    'source' => [
+                        'QQQQ00313.mov' => 'test source content',
+                    ],
+                ],
             ],
             'dest' => [
                 'TEST' => [
@@ -72,7 +81,8 @@ class SyncCommandTest extends WebTestCase
                     'TEST00413.mov' => 'test stream content 2',
                 ],
             ],
-            'exclude.json' => '["TEST00513.mov"]',
+            'exclude-episodes.json' => '["TEST00513.mov"]',
+            'exclude-shows.json'    => '["QQQQ"]',
         ];
     }
 }

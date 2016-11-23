@@ -18,7 +18,8 @@ app:
         path:    "vfs://root/source"
         filters:
             path: { pattern: "~[A-Z]{4}/stream/.*\.mov~" }
-            exclude: { path: "vfs://root/exclude.json" }
+            excludeEpisodes: { path: "vfs://root/exclude-episodes.json" }
+            excludeShows: { path: "vfs://root/exclude-shows.json" }
     slave:
         storage: local
         path:    "vfs://root/dest"
