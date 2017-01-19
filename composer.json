@@ -1,53 +1,60 @@
 {
-    "name": "hope/file-sync",
-    "license": "MIT",
-    "description": "Library fo File Synchronization",
-    "keywords": ["synchronization","hopechannel","hopeua"],
-    "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
-    },
-    "require": {
-        "php": ">=5.4",
-        "symfony/symfony": "2.5.*",
-        "symfony/monolog-bundle": "~2.4",
-        "twig/extensions": "~1.0",
-        "sensio/distribution-bundle": "~3.0",
-        "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "ruflin/elastica": "~1.3"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.1",
-        "mikey179/vfsStream": "~1.0",
-        "nelmio/alice": "~1.7",
-        "squizlabs/php_codesniffer": "~1.5"
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "extra": {
-        "symfony-app-dir": "app",
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml",
-            "keep-outdated": true
-        },
-        "branch-alias": {
-            "dev-master": "2.5-dev"
-        }
+  "name": "hope/file-sync",
+  "license": "MIT",
+  "description": "Library fo File Synchronization",
+  "keywords": [
+    "synchronization",
+    "hopechannel",
+    "hopeua"
+  ],
+  "autoload": {
+    "psr-0": {
+      "": "src/",
+      "SymfonyStandard": "app/"
     }
+  },
+  "require": {
+    "php": ">=5.4",
+    "symfony/symfony": "2.5.*",
+    "symfony/monolog-bundle": "~2.4",
+    "twig/extensions": "~1.0",
+    "sensio/distribution-bundle": "~3.0",
+    "sensio/framework-extra-bundle": "~3.0",
+    "incenteev/composer-parameter-handler": "~2.0",
+    "ruflin/elastica": "~1.3"
+  },
+  "require-dev": {
+    "sensio/generator-bundle": "~2.3",
+    "phpunit/phpunit": "~4.1",
+    "mikey179/vfsStream": "~1.0",
+    "nelmio/alice": "~1.7",
+    "squizlabs/php_codesniffer": "~1.5"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "SymfonyStandard\\Composer::hookRootPackageInstall"
+    ],
+    "post-install-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+    ],
+    "post-update-cmd": [
+      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+    ]
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "extra": {
+    "symfony-app-dir": "app",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml",
+      "keep-outdated": true
+    },
+    "branch-alias": {
+      "dev-master": "2.5-dev"
+    }
+  }
 }

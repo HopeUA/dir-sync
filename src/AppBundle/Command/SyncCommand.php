@@ -42,8 +42,6 @@ class SyncCommand extends ContainerAwareCommand
         $sync->setSlaveFilters($slaveFilters);
 
         $sync->run();
-
-        return 0;
     }
 
     /**

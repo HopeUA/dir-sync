@@ -16,16 +16,6 @@ services:
         class: Monolog\Formatter\LineFormatter
         lazy: true
 
-    # Elastic logger
-    elastic.log.handler:
-        class: Monolog\Handler\ElasticSearchHandler
-        arguments: [@elastic.client, { index: %elastic.log.index%, type: %elastic.log.type% }]
-        lazy: true
-    elastic.client:
-        class: Elastica\Client
-        arguments: [%elastic.client.config%]
-        lazy: true
-
     # Storage services
     storage.local:
         class: AppBundle\Sync\Storage\Local
