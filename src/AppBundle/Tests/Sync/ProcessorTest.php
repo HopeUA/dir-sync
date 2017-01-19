@@ -1,10 +1,12 @@
 <?php
 namespace AppBundle\Tests\Sync;
 
+use AppBundle\Sync\Entity\Task;
 use AppBundle\Sync\Processor;
 use AppBundle\Sync\Entity\Task\Add;
 use AppBundle\Sync\Entity\Task\Delete;
 use AppBundle\Sync\Entity\Task\Update;
+use AppBundle\Sync\Storage\StorageInterface;
 
 /**
  * Task Processor tests
@@ -15,7 +17,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
     public function testAdd()
     {
-        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
+        $storage = $this->getMockBuilder(StorageInterface::class)
+            ->setMethods(['put'])
+            ->getMock();
         $storage->expects($this->once())
                 ->method('put');
 
@@ -27,7 +31,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
+        $storage = $this->getMockBuilder(StorageInterface::class)
+            ->setMethods(['put'])
+            ->getMock();
         $storage->expects($this->once())
                 ->method('put');
 
@@ -39,7 +45,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
-        $storage = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
+        $storage = $this->getMockBuilder(StorageInterface::class)
+            ->setMethods(['delete'])
+            ->getMock();
         $storage->expects($this->once())
                 ->method('delete');
 
@@ -55,9 +63,11 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidTask()
     {
-        $storage   = $this->getMock('\\AppBundle\\Sync\\Storage\\StorageInterface');
+        $storage = $this->getMockBuilder(StorageInterface::class)
+            ->getMock();
         $processor = new Processor($storage);
-        $task      = $this->getMock('\\AppBundle\\Sync\\Entity\\Task');
+        $task = $this->getMockBuilder(Task::class)
+            ->getMock();
 
         $processor->execute($task);
     }

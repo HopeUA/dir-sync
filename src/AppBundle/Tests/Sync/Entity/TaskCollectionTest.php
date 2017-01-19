@@ -16,7 +16,8 @@ class TaskCollectionTest extends \PHPUnit_Framework_TestCase
         /**
          * @var Task $task
          */
-        $task = $this->getMock('\\AppBundle\\Sync\\Entity\\Task');
+        $task = $this->getMockBuilder(Task::class)
+            ->getMock();
 
         // Create collection
         $collection = new TaskCollection();

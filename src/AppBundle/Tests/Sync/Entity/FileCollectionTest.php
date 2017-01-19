@@ -3,6 +3,7 @@ namespace AppBundle\Tests\Sync\Entity;
 
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;
+use AppBundle\Sync\Entity\Filter\FilterInterface;
 use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
 /**
@@ -38,12 +39,16 @@ class FileCollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFilter($files)
     {
-        $filter1 = $this->getMock('\\AppBundle\\Sync\\Entity\\Filter\\FilterInterface');
+        $filter1 = $this->getMockBuilder(FilterInterface::class)
+            ->setMethods(['valid'])
+            ->getMock();
         $filter1
             ->expects($this->exactly(count($files)))
             ->method('valid')
             ->willReturn(true);
-        $filter2 = $this->getMock('\\AppBundle\\Sync\\Entity\\Filter\\FilterInterface');
+        $filter2 = $this->getMockBuilder(FilterInterface::class)
+            ->setMethods(['valid'])
+            ->getMock();
         $filter2
             ->expects($this->exactly(count($files)))
             ->method('valid')
