@@ -58,8 +58,7 @@ class Lto implements StorageInterface
         $command = sprintf('dsmc delete archive %s -noprompt', $path);
         $result  = shell_exec($command);
 
-        if (
-            strpos($result, 'No objects on server match query')            === false &&
+        if (strpos($result, 'No objects on server match query')            === false &&
             strpos($result, 'Total number of objects deleted:          1') === false
         ) {
             throw new StorageException(
