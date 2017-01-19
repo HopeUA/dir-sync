@@ -39,7 +39,7 @@ class TaskGeneratorTest extends \PHPUnit_Framework_TestCase
 
         // Generate tasks
         $taskGenerator = new TaskGenerator();
-        $taskGenerator->setSlavePathTpl('/path/to/{program}/{uid}');
+        $taskGenerator->setSlavePathTpl('/path/to/__program__/__uid__');
         $tasks = $taskGenerator->handle($masterCollection, $slaveCollection);
 
         // Tasks check

@@ -62,8 +62,8 @@ class TaskGenerator
     public function getSlavePath($uid)
     {
         $path = $this->getSlavePathTpl();
-        $path = str_replace('{uid}', $uid, $path);
-        $path = str_replace('{program}', substr($uid, 0, 4), $path);
+        $path = str_replace('__uid__', $uid, $path);
+        $path = str_replace('__program__', substr($uid, 0, 4), $path);
 
         return $path;
     }

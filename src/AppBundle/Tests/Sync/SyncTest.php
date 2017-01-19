@@ -6,6 +6,7 @@ use AppBundle\Sync\Storage\Local;
 use AppBundle\Sync\Sync;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\visitor\vfsStreamStructureVisitor;
 
 /**
  * Sync tests
@@ -74,7 +75,7 @@ class SyncTest extends \PHPUnit_Framework_TestCase
         // Set up Slave
         $slaveStorage = new Local();
         $slavePath    = 'root/dest';
-        $slavePathTpl = $slavePath . '/{program}/{uid}';
+        $slavePathTpl = $slavePath . '/__program__/__uid__';
 
         $sync->setSlaveStorage($slaveStorage);
         $sync->setSlavePath(vfsStream::url($slavePath));

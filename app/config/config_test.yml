@@ -23,5 +23,5 @@ app:
     slave:
         storage: local
         path:    "vfs://root/dest"
-        path_tpl: "/{program}/{uid}"
+        path_tpl: "/__program__/__uid__"
         filters:
