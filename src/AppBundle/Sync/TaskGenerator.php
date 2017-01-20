@@ -152,7 +152,6 @@ class TaskGenerator
         }
 
         // Halt on huge delete action
-        //$deletePart = $deleteTaskCounter / ($deleteTaskCounter + $createTaskCounter) * 100;
         if ($deleteTaskCounter > 50) {
             throw new TaskException(
                 'Huge amount of DELETE tasks. Exiting.'
