@@ -3,21 +3,13 @@ imports:
 
 framework:
     test: ~
-    session:
-        storage_id: session.storage.mock_file
-    profiler:
-        collect: false
-
-web_profiler:
-    toolbar: false
-    intercept_redirects: false
 
 app:
     master:
         storage: local
         path:    "vfs://root/source"
         filters:
-            path: { pattern: "~[A-Z]{4}/stream/.*\.mov~" }
+            path: { pattern: "~[A-Z]{4}/stream/.*\\.mov~" }
             excludeEpisodes: { path: "vfs://root/exclude-episodes.json" }
             excludeShows: { path: "vfs://root/exclude-shows.json" }
     slave:

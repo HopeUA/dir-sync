@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync\Entity;
+namespace Tests\AppBundle\Sync\Entity;
 
 /**
  * Collection tests

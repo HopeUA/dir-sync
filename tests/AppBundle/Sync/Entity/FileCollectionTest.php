@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync\Entity;
+namespace Tests\AppBundle\Sync\Entity;
 
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;

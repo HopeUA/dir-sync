@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Command;
+namespace Tests\AppBundle\Command;
 
 use AppBundle\Command\SyncCommand;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

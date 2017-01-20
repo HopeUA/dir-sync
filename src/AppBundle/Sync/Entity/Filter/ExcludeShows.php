@@ -39,7 +39,7 @@ class ExcludeShows implements FilterInterface
      */
     protected function load()
     {
-        $result = file_get_contents($this->getPath());
+        $result = @file_get_contents($this->getPath());
 
         if (false === $result) {
             throw new ExcludeFilterException(

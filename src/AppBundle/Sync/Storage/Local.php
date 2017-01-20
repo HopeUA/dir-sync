@@ -28,7 +28,7 @@ class Local implements StorageInterface
 
         $this->ensureDirectory(dirname($destPath));
 
-        $result = copy($sourcePath, $destPath);
+        $result = @copy($sourcePath, $destPath);
         if (!$result) {
             throw new LocalStorageException(
                 sprintf('Copy failed: %s', $sourcePath),

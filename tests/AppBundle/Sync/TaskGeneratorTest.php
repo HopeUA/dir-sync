@@ -1,10 +1,10 @@
 <?php
-namespace AppBundle\Tests\Sync;
+namespace Tests\AppBundle\Sync;
 
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;
 use AppBundle\Sync\TaskGenerator;
-use Nelmio\Alice\Loader\Yaml;
+use Nelmio\Alice\Fixtures\Loader;
 
 /**
  * Task Generator tests
@@ -16,7 +16,7 @@ class TaskGeneratorTest extends \PHPUnit_Framework_TestCase
     public function testSuccessHandle()
     {
         // Sample files
-        $loader = new Yaml();
+        $loader = new Loader();
         $files = $loader->load(__DIR__ . '/../Fixtures/files.yml');
 
         // Collecting master

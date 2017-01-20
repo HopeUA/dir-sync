@@ -5,8 +5,6 @@ php:
   - 7.1
   - 7.0
   - 5.6
-  - 5.5
-  - 5.4
 
 matrix:
   allow_failures:
@@ -18,7 +16,7 @@ before_script:
   - composer install --prefer-source --no-interaction
 
 script:
-  - phpunit -c app/ -d error_reporting=0 --coverage-text --coverage-clover=coverage.clover
+  - phpunit --coverage-text --coverage-clover=coverage.clover
   - ./bin/phpcs --standard=PSR2 src/
 
 after_script:

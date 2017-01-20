@@ -4,13 +4,13 @@ services:
         class: Symfony\Bridge\Monolog\Logger
         arguments: [%app.name%]
         calls:
-            - [pushHandler, [@log.handler]]
+            - [pushHandler, ["@log.handler"]]
     # File logger (default: app/logs/sync.log)
     file.log.handler:
         class: Monolog\Handler\StreamHandler
         arguments: [%file.log.path%, 200]
         calls:
-            - [setFormatter, [@file.log.formatter]]
+            - [setFormatter, ["@file.log.formatter"]]
         lazy: true
     file.log.formatter:
         class: Monolog\Formatter\LineFormatter
@@ -39,9 +39,9 @@ services:
     app:
         class: AppBundle\Sync\Sync
         calls:
-            - [setMasterStorage, [@master.storage]]
-            - [setMasterPath, [%master.path%]]
-            - [setSlaveStorage, [@slave.storage]]
-            - [setSlavePath, [%slave.path%]]
+            - [setMasterStorage, ["@master.storage"]]
+            - [setMasterPath, ["%master.path%"]]
+            - [setSlaveStorage, ["@slave.storage"]]
+            - [setSlavePath, ["%slave.path%"]]
             - [setSlavePathTpl, ["%slave.path%%slave.path_tpl%"]]
-            - [setLogger, [@app.logger]]
+            - [setLogger, ["@app.logger"]]

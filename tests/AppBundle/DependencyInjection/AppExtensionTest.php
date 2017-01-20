@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\DependencyInjection;
+namespace Tests\AppBundle\DependencyInjection;
 
 use AppBundle\DependencyInjection\AppExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

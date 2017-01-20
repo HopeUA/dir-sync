@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync\Entity;
+namespace Tests\AppBundle\Sync\Entity;
 
 use AppBundle\Sync\Entity\Task;
 use AppBundle\Sync\Entity\TaskCollection;

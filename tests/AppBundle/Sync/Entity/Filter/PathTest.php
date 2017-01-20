@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync\Entity\Filter;
+namespace Tests\AppBundle\Sync\Entity\Filter;
 
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\Filter\Path;

@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync;
+namespace Tests\AppBundle\Sync;
 
 use AppBundle\Sync\Entity\Filter\Path;
 use AppBundle\Sync\Storage\Local;

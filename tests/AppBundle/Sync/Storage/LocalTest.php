@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync\Storage;
+namespace Tests\AppBundle\Sync\Storage;
 
 use AppBundle\Sync\Storage\Local;
 use AppBundle\Sync\Entity\File;

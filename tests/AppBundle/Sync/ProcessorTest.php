@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle\Tests\Sync;
+namespace Tests\AppBundle\Sync;
 
 use AppBundle\Sync\Entity\Task;
 use AppBundle\Sync\Processor;
@@ -17,9 +17,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 {
     public function testAdd()
     {
-        $storage = $this->getMockBuilder(StorageInterface::class)
-            ->setMethods(['put'])
-            ->getMock();
+        $storage = $this->getMockForAbstractClass(StorageInterface::class);
         $storage->expects($this->once())
                 ->method('put');
 
@@ -31,9 +29,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $storage = $this->getMockBuilder(StorageInterface::class)
-            ->setMethods(['put'])
-            ->getMock();
+        $storage = $this->getMockForAbstractClass(StorageInterface::class);
         $storage->expects($this->once())
                 ->method('put');
 
@@ -45,9 +41,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
-        $storage = $this->getMockBuilder(StorageInterface::class)
-            ->setMethods(['delete'])
-            ->getMock();
+        $storage = $this->getMockForAbstractClass(StorageInterface::class);
         $storage->expects($this->once())
                 ->method('delete');
 
@@ -63,8 +57,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidTask()
     {
-        $storage = $this->getMockBuilder(StorageInterface::class)
-            ->getMock();
+        $storage = $this->getMockForAbstractClass(StorageInterface::class);
         $processor = new Processor($storage);
         $task = $this->getMockBuilder(Task::class)
             ->getMock();

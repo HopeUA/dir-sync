@@ -8,52 +8,49 @@
     "hopeua"
   ],
   "autoload": {
-    "psr-0": {
-      "": "src/",
-      "SymfonyStandard": "app/"
-    }
+    "psr-4": { "": "src/" },
+    "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+  },
+  "autoload-dev": {
+    "psr-4": { "Tests\\": "tests/" }
   },
   "require": {
     "php": ">=5.6",
-    "symfony/symfony": "2.5.*",
-    "symfony/monolog-bundle": "~2.4",
-    "twig/extensions": "~1.0",
-    "sensio/distribution-bundle": "~3.0",
-    "sensio/framework-extra-bundle": "~3.0",
-    "incenteev/composer-parameter-handler": "~2.0"
+    "symfony/symfony": "^3.2.2",
+    "symfony/monolog-bundle": "^3.0.3",
+    "sensio/distribution-bundle": "^5.0.18",
+    "incenteev/composer-parameter-handler": "^2.1.2"
   },
   "require-dev": {
-    "sensio/generator-bundle": "~2.3",
     "phpunit/phpunit": "^5.7.5",
     "mikey179/vfsStream": "^1.6.4",
     "nelmio/alice": "^2.2.2",
     "squizlabs/php_codesniffer": "^2.7.1"
   },
   "scripts": {
-    "post-root-package-install": [
-      "SymfonyStandard\\Composer::hookRootPackageInstall"
-    ],
-    "post-install-cmd": [
-      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
-    ],
-    "post-update-cmd": [
+    "symfony-scripts": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+    ],
+    "post-install-cmd": [
+      "@symfony-scripts"
+    ],
+    "post-update-cmd": [
+      "@symfony-scripts"
     ]
-  },
-  "config": {
-    "bin-dir": "bin"
   },
   "extra": {
     "symfony-app-dir": "app",
+    "symfony-bin-dir": "bin",
+    "symfony-var-dir": "var",
     "incenteev-parameters": {
-      "file": "app/config/parameters.yml",
-      "keep-outdated": true
+      "file": "app/config/parameters.yml"
     },
     "branch-alias": {
-      "dev-master": "2.5-dev"
+      "dev-master": "3.2-dev"
     }
   }
 }
