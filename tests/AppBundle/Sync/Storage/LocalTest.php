@@ -181,7 +181,7 @@ class LocalTest extends \PHPUnit_Framework_TestCase
         $sourceDir  = 'root/missing/dir';
 
         $storage    = new Local();
-        $collection = $storage->listContents(vfsStream::url($sourceDir));
+        $storage->listContents(vfsStream::url($sourceDir));
     }
 
     /**
