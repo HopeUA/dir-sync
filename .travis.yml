@@ -12,12 +12,11 @@ matrix:
 
 before_script:
   - "mkdir -p ~/.composer"
-  - composer self-update
   - composer install --prefer-source --no-interaction
 
 script:
   - phpunit --coverage-text --coverage-clover=coverage.clover
-  - ./bin/phpcs --standard=PSR2 src/
+  - ./vendor/bin/phpcs --standard=PSR2 src/
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
