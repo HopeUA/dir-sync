@@ -3,6 +3,7 @@ namespace AppBundle\Sync;
 
 use AppBundle\Exception\TaskException;
 use AppBundle\Sync\Entity\FileCollection;
+use AppBundle\Sync\Entity\Task;
 use AppBundle\Sync\Entity\Task\Add;
 use AppBundle\Sync\Entity\Task\Delete;
 use AppBundle\Sync\Entity\Task\Update;
@@ -154,7 +155,8 @@ class TaskGenerator
         // Halt on huge delete action
         if ($deleteTaskCounter > 50) {
             throw new TaskException(
-                'Huge amount of DELETE tasks. Exiting.'
+                'Huge amount of DELETE tasks. Exiting.',
+                TaskException::HUGE_AMOUNT_TO_DELETE
             );
         }
 

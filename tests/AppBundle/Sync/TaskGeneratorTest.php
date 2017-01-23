@@ -58,4 +58,33 @@ class TaskGeneratorTest extends \PHPUnit_Framework_TestCase
         $taskGenerator = new TaskGenerator();
         $taskGenerator->getSlavePathTpl();
     }
+
+    /**
+     * @expectedException \AppBundle\Exception\TaskException
+     * @expectedExceptionCode \AppBundle\Exception\TaskException::HUGE_AMOUNT_TO_DELETE
+     */
+    public function testHugeAmountOfFiles()
+    {
+        // Sample files
+        $loader = new Loader();
+        $files = $loader->load(__DIR__ . '/../Fixtures/alotOfFiles.yml');
+
+        // Collecting master
+        $masterCollection = new FileCollection();
+
+        // Collecting slave
+        $slaveCollection  = new FileCollection();
+
+        /**
+         * @var File $file
+         */
+        foreach ($files as $file) {
+            $slaveCollection->addFile($file);
+        }
+
+        // Generate tasks
+        $taskGenerator = new TaskGenerator();
+        $taskGenerator->setSlavePathTpl('/path/to/__program__/__uid__');
+        $taskGenerator->handle($masterCollection, $slaveCollection);
+    }
 }
