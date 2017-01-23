@@ -8,7 +8,7 @@
     "hopeua"
   ],
   "autoload": {
-    "psr-4": { "": "src/" },
+    "psr-4": { "AppBundle\\": "src/AppBundle" },
     "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
   },
   "autoload-dev": {
