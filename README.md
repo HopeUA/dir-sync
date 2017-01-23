@@ -9,22 +9,42 @@ Directory Synchronizer
 Console tool to synchronize files in two directories.
 
 ### Usage
-Install
+#### Install
 
     git clone https://github.com/HopeUA/dir-sync.git dir-sync
     cd dir-sync
     composer install --optimize-autoloader
 
-Configure
-... in development
+#### Configure
+Write your configuration to __app/config/parameters.yml__
 
-Run tests
-
-    bin/phpunit -c app/
+    app.name: app
     
+    app.master.storage: local
+    app.master.path: /master
+    app.master.filters:
+        path:
+            pattern: '~[a-z]\.mp4~'
+        excludeEpisodes:
+            path: '/path/to/file.json'
+    
+    app.slave.storage: local
+    app.slave.path: /slave
+    app.slave.path_tpl: /__program__/__uid__
+    app.slave.filters: null
+
+    app.logger: file
+    file.log.path: %kernel.logs_dir%/sync.log
+
+#### Run tests
+
+    composer test
+    
+#### Schedule 
 Add new cronjob to run synchronization periodically
 
-    php app/console sync:run
+    php bin/console sync:run
     
-Logs are stored in *app/logs/sync.log*
+#### Monitor
+Default logs location – *var/logs/sync.log*
 
