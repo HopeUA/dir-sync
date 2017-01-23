@@ -4,7 +4,7 @@ namespace Tests\AppBundle\Sync\Entity;
 use AppBundle\Sync\Entity\File;
 use AppBundle\Sync\Entity\FileCollection;
 use AppBundle\Sync\Entity\Filter\FilterInterface;
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
+use Tests\AppBundle\Mock\FileCollection as FileCollectionMock;
 
 /**
  * File Collection tests
@@ -130,6 +130,29 @@ class FileCollectionTest extends \PHPUnit_Framework_TestCase
         $fc->addFile($file);
 
         $this->assertEquals($file, $fc->getByUid($file->getUid()));
+    }
+
+    /**
+     * @dataProvider fileProvider
+     */
+    public function testCorruptedIndex($files)
+    {
+        $fc = new FileCollectionMock();
+
+        /**
+         * @var File $file
+         */
+        foreach ($files as $file) {
+            $fc->addFile($file);
+        }
+
+        $file = $files[0];
+
+        $fc->clearIndexKeys();
+        $this->assertNull($fc->getByUid($file->getUid()));
+
+        $fc->clearIndex();
+        $this->assertNull($fc->del($file->getUid()));
     }
 
     public function fileProvider()
