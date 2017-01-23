@@ -1,11 +1,14 @@
 {
-  "name": "hope/file-sync",
+  "name": "hope/dir-sync",
+  "version": "1.0.0",
   "license": "MIT",
-  "description": "Library fo File Synchronization",
-  "keywords": [
-    "synchronization",
-    "hopechannel",
-    "hopeua"
+  "description": "Script fo directory synchronization",
+  "authors": [
+    {
+      "name": "Sergey Sadovoi",
+      "email": "sergey@hope.ua",
+      "role": "Developer"
+    }
   ],
   "autoload": {
     "psr-4": { "AppBundle\\": "src/AppBundle" },
