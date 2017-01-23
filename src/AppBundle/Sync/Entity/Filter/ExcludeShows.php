@@ -8,7 +8,7 @@ use AppBundle\Sync\Entity\File;
  *
  * @author Sergey Sadovoi <serg.sadovoi@gmail.com>
  */
-class ExcludeShow extends Exclude
+class ExcludeShows extends Exclude
 {
     /**
      * {@inheritdoc}

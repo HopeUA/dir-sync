@@ -39,7 +39,9 @@
     ],
     "post-update-cmd": [
       "@symfony-scripts"
-    ]
+    ],
+    "test": "phpunit --coverage-text --coverage-clover=coverage.clover",
+    "lint": "./vendor/bin/phpcs --standard=PSR2 src/"
   },
   "extra": {
     "symfony-app-dir": "app",
