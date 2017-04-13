@@ -2,9 +2,14 @@ services:
     # Logs
     app.logger:
         class: Symfony\Bridge\Monolog\Logger
-        arguments: [%app.name%]
+        arguments: ["%app.name%"]
         calls:
             - [pushHandler, ["@log.handler"]]
+
+    app.locker:
+        class: Hope\Locker\FileLocker
+        arguments: ["%app.name%", "%kernel.cache_dir%"]
+
     # File logger (default: app/logs/sync.log)
     file.log.handler:
         class: Monolog\Handler\StreamHandler
@@ -45,3 +50,4 @@ services:
             - [setSlavePath, ["%slave.path%"]]
             - [setSlavePathTpl, ["%slave.path%%slave.path_tpl%"]]
             - [setLogger, ["@app.logger"]]
+            - [setLocker, ["@app.locker"]]

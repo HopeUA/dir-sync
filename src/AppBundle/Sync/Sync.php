@@ -5,6 +5,7 @@ use AppBundle\Exception\FilterException;
 use AppBundle\Exception\StorageException;
 use AppBundle\Exception\TaskException;
 use AppBundle\Sync\Storage\StorageInterface as Storage;
+use Hope\Locker\LockerInterface;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
@@ -50,6 +51,10 @@ class Sync
      * @var LoggerInterface
      */
     protected $logger;
+    /**
+     * @var LockerInterface
+     */
+    protected $locker;
 
     /**
      * Runs the sync tasks
@@ -57,8 +62,14 @@ class Sync
     public function run()
     {
         $logger = $this->getLogger();
+        $locker = $this->getLocker();
 
-        // Log
+        if ($locker->isLocked()) {
+            $logger->warning('Another process is running');
+            return;
+        }
+
+        $locker->lock();
         $logger->info('START Synchronization');
 
         try {
@@ -108,8 +119,8 @@ class Sync
             }
         }
 
-        // Log
         $logger->info('END Synchronization');
+        $locker->release();
     }
 
     /**
@@ -147,6 +158,22 @@ class Sync
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * @return LockerInterface
+     */
+    public function getLocker()
+    {
+        return $this->locker;
+    }
+
+    /**
+     * @param LockerInterface $locker
+     */
+    public function setLocker(LockerInterface $locker)
+    {
+        $this->locker = $locker;
     }
 
     /**

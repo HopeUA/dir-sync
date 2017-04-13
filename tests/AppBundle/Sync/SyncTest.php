@@ -4,6 +4,7 @@ namespace Tests\AppBundle\Sync;
 use AppBundle\Sync\Entity\Filter\Path;
 use AppBundle\Sync\Storage\Local;
 use AppBundle\Sync\Sync;
+use Hope\Locker\FileLocker;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\visitor\vfsStreamStructureVisitor;
@@ -50,7 +51,10 @@ class SyncTest extends \PHPUnit_Framework_TestCase
                     'TEST00313.mov' => 'test stream content 2',
                     'TEST00413.mov' => 'test stream content 2',
                 ],
-            ]
+            ],
+            'lock' => [
+                'lock.tmp' => '',
+            ],
         ];
         // Init virtual FS
         $this->root = vfsStream::setup('root', null, $tree);
@@ -80,6 +84,9 @@ class SyncTest extends \PHPUnit_Framework_TestCase
         $sync->setSlaveStorage($slaveStorage);
         $sync->setSlavePath(vfsStream::url($slavePath));
         $sync->setSlavePathTpl(vfsStream::url($slavePathTpl));
+
+        $locker = new FileLocker('test-sync', vfsStream::url('root/lock'));
+        $sync->setLocker($locker);
 
         // Run
         $sync->run();
