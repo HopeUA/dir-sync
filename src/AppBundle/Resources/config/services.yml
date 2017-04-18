@@ -6,11 +6,12 @@ services:
         calls:
             - [pushHandler, ["@log.handler"]]
 
+    # Process locker
     app.locker:
         class: Hope\Locker\FileLocker
-        arguments: ["%app.name%", "%kernel.cache_dir%"]
+        arguments: ["%app.name%", "%kernel.root_dir%/../var/lock"]
 
-    # File logger (default: app/logs/sync.log)
+    # File logger (default: var/logs/sync.log)
     file.log.handler:
         class: Monolog\Handler\StreamHandler
         arguments: [%file.log.path%, 200]
