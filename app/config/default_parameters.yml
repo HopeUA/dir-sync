@@ -2,4 +2,4 @@ parameters:
     app.logger: file
     app.name: app
 
-    file.log.path: %kernel.logs_dir%/sync.log
+    file.log.path: "%kernel.logs_dir%/sync.log"

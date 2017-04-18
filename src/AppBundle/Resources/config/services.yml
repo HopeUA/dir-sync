@@ -14,7 +14,7 @@ services:
     # File logger (default: var/logs/sync.log)
     file.log.handler:
         class: Monolog\Handler\StreamHandler
-        arguments: [%file.log.path%, 200]
+        arguments: ["%file.log.path%", 200]
         calls:
             - [setFormatter, ["@file.log.formatter"]]
         lazy: true
@@ -33,13 +33,13 @@ services:
     # Filters
     filter.path:
         class: AppBundle\Sync\Entity\Filter\Path
-        scope: prototype
+        shared: false
     filter.excludeEpisodes:
         class: AppBundle\Sync\Entity\Filter\ExcludeEpisodes
-        scope: prototype
+        shared: false
     filter.excludeShows:
         class: AppBundle\Sync\Entity\Filter\ExcludeShows
-        scope: prototype
+        shared: false
 
     # Main App
     app:
